@@ -13,7 +13,7 @@ git add .
 git commit -m ""
 git pull
 # 处理冲突
-git rebease --continue
+git rebase --continue
 git push feature-xxx feature-xxx
 ```
 
