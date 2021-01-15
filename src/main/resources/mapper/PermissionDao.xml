@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.PermissionDao">
+
+    <resultMap type="zju.cst.project.entity.ProPermission" id="PermissionMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="permissionCode" column="permission_code" jdbcType="VARCHAR"/>
+        <result property="permissionName" column="permission_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="selectListByUser" resultMap="PermissionMap">
+        SELECT
+        p.*
+        FROM
+        pro_user AS u
+        LEFT JOIN pro_user_role AS ur
+        ON u.id = ur.user_id
+        LEFT JOIN pro_role AS r
+        ON r.id = ur.role_id
+        LEFT JOIN pro_role_permission AS rp
+        ON r.id = rp.role_id
+        LEFT JOIN pro_permission AS p
+        ON p.id = rp.permission_id
+        WHERE u.id = #{userId}
+    </select>
+
+    <select id="selectListByPath" resultMap="PermissionMap">
+        SELECT
+            pe.*
+        FROM
+            pro_permission pe
+        LEFT JOIN pro_request_path_permission re ON re.permission_id = pe.id
+        LEFT JOIN pro_request_path pa ON pa.id = re.url_id
+        WHERE pa.url = #{path}
+    </select>
+</mapper>
