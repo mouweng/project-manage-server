@@ -4,6 +4,12 @@ import zju.cst.project.common.enums.ResultCode;
 
 import java.io.Serializable;
 
+/**
+ * @Author: wengyifan
+ * @Description: 返回结果Json封装
+ * @Date Create in 2021/1/21 7:30 下午
+ */
+
 public class JsonResult<T> implements Serializable {
     private Boolean success;
     private Integer code;

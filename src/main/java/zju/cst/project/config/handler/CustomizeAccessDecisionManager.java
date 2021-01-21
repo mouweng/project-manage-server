@@ -12,7 +12,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
+ * @Author: wengyifan
  * @Description: 访问决策管理器
+ * @Date Create in 2021/1/21 7:30 下午
  */
 @Component
 public class CustomizeAccessDecisionManager implements AccessDecisionManager {

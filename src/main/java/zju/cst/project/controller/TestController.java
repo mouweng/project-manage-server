@@ -12,7 +12,11 @@ import zju.cst.project.service.UserService;
 
 import java.util.List;
 
-
+/**
+ * @Author: wengyifan
+ * @Description: 测试Controller入口
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 @RestController
 public class TestController {
     @Autowired
@@ -37,6 +41,7 @@ public class TestController {
         List<ProPermission> permissions = permissionService.selectListByPath("/user/getUser");
         return ResultTool.success(permissions);
     }
+
 
     @GetMapping("/update")
     public JsonResult getUser() {

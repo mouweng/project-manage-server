@@ -14,9 +14,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @Author: Hutengfei
- * @Description:
- * @Date Create in 2019/9/3 21:06
+ * @Author: wengyifan
+ * @Description: 权限过滤验证
+ * @Date Create in 2021/1/21 7:30 下午
  */
 @Component
 public class CustomizeFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
@@ -29,6 +29,7 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
 
         // todo: 把后方的数字id给去掉
+        System.out.println("requestUrl: " + requestUrl);
         requestUrl = deleteNum(requestUrl);
 
         // 查询具体某个接口的权限
@@ -56,6 +57,13 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
     }
 
     public static String deleteNum(String s) {
+        // 首先去掉问号后面的字符串
+        int index = 0;
+        while (index < s.length() && s.charAt(index) != '?') {
+            index ++;
+        }
+        s = s.substring(0, index);
+
         StringBuffer sb = new StringBuffer();
         String[] arr = s.split("/");
         if (arr.length == 0) return "/";

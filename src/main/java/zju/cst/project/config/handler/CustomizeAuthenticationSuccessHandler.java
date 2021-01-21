@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.util.Date;
 
 /**
- * @Author: Hutengfei
+ * @Author: wengyifan
  * @Description: 登录成功处理逻辑
- * @Date Create in 2019/9/3 15:52
+ * @Date Create in 2021/1/21 7:30 下午
  */
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

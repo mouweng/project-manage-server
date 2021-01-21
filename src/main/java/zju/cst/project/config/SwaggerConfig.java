@@ -10,16 +10,37 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
+
+/**
+ * @Author: wengyifan
+ * @Description: Swagger配置
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 @Configuration
 @EnableSwagger2 // 开启Swagger
 public class SwaggerConfig {
-    // 配置Swagger的Docket的bean实例
+    /**
+     * @param
+     * @return {@link Docket}
+     * @throws
+     * @author: wengyifan
+     * @description: 配置Swagger的Docket的bean实例
+     * @date: 2021/1/21 7:51 下午
+     */
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo());
     }
 
+    /**
+     * @param
+     * @return {@link ApiInfo}
+     * @throws
+     * @author: wengyifan
+     * @description:
+     * @date: 2021/1/21 7:51 下午
+     */
     private ApiInfo apiInfo() {
         Contact contact = new Contact("项目管理系统", "http://www.zju.com", "wengyfian@zju.edu.cn");
 

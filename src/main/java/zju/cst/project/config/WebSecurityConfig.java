@@ -14,6 +14,12 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import zju.cst.project.config.handler.*;
 import zju.cst.project.service.impl.UserDetailsServiceImpl;
 
+
+/**
+ * @Author: wengyifan
+ * @Description: Spring Security 配置
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -64,11 +70,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * @param auth
+     * @return {@link }
+     * @throws
+     * @author: wengyifan
+     * @description:
+     * @date: 2021/1/21 7:52 下午
+     */
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
     }
 
+    /**
+     * @param http
+     * @return {@link }
+     * @throws
+     * @author: wengyifan
+     * @description:
+     * @date: 2021/1/21 7:53 下午
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();

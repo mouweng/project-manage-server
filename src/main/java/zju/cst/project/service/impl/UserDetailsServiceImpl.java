@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import zju.cst.project.entity.ProPermission;
 import zju.cst.project.entity.ProUser;
 import zju.cst.project.service.PermissionService;
@@ -15,12 +16,26 @@ import zju.cst.project.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author: wengyifan
+ * @Description: UserDetailsServiceImpl 实现类，用作springsecurity的登录逻辑
+ * @Date Create in 2021/1/21 7:30 下午
+ */
+
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
     @Autowired
     private PermissionService permissionService;
 
+    /**
+     * @param username
+     * @return {@link UserDetails}
+     * @throws
+     * @author: wengyifan
+     * @description: loadUserByUsername
+     * @date: 2021/1/21 8:05 下午
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (username == null || "".equals(username)) {

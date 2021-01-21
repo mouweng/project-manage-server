@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * @Author: wengyifan
  * @Description: 匿名用户访问无权限资源时的异常
+ * @Date Create in 2021/1/21 7:30 下午
  */
 @Component
 public class CustomizeAuthenticationEntryPoint implements AuthenticationEntryPoint {

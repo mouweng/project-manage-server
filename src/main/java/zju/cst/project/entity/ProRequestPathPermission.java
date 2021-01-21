@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * @Author: wengyifan
+ * @Description: ProRequestPathPermission JavaBean
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

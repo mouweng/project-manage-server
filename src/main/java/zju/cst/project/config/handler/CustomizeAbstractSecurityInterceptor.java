@@ -12,7 +12,9 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /**
+ * @Author: wengyifan
  * @Description: 权限拦截器
+ * @Date Create in 2021/1/21 7:30 下午
  */
 @Service
 public class CustomizeAbstractSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {

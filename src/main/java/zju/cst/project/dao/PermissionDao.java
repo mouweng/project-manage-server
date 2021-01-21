@@ -5,21 +5,32 @@ import zju.cst.project.entity.ProPermission;
 
 import java.util.List;
 
+/**
+ * @Author: wengyifan
+ * @Description: Permission数据接口层
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 @Mapper
 public interface PermissionDao {
+
     /**
-     * 查询用户的权限
-     *
      * @param id
-     * @return
+     * @return {@link List< ProPermission>}
+     * @throws
+     * @author: wengyifan
+     * @description: 查询用户的权限
+     * @date: 2021/1/21 7:57 下午
      */
     List<ProPermission> selectListByUser(Integer id);
 
+
     /**
-     * 查询具体某个接口的权限
-     *
-     * @param path 接口路径
-     * @return
+     * @param path
+     * @return {@link List< ProPermission>}
+     * @throws
+     * @author: wengyifan
+     * @description: 查询具体某个接口的权限
+     * @date: 2021/1/21 7:57 下午
      */
     List<ProPermission> selectListByPath(String path);
 }

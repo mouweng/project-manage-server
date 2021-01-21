@@ -2,28 +2,39 @@ package zju.cst.project.service;
 
 import zju.cst.project.entity.ProUser;
 
+/**
+ * @Author: wengyifan
+ * @Description: UserService 接口
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 public interface UserService {
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
+     * @param id
+     * @return {@link ProUser}
+     * @throws
+     * @author: wengyifan
+     * @description: 通过ID查询单条数据
+     * @date: 2021/1/21 8:03 下午
      */
     ProUser queryById(Integer id);
 
     /**
-     * 根据用户名查询用户
-     *
      * @param username
-     * @return
+     * @return {@link ProUser}
+     * @throws
+     * @author: wengyifan
+     * @description: 根据用户名查询用户
+     * @date: 2021/1/21 8:04 下午
      */
     ProUser selectByName(String username);
 
     /**
-     * 修改数据
-     *
-     * @param proUser 实例对象
-     * @return 实例对象
+     * @param proUser
+     * @return {@link ProUser}
+     * @throws
+     * @author: wengyifan
+     * @description: 修改数据
+     * @date: 2021/1/21 8:04 下午
      */
     ProUser update(ProUser proUser);
 }

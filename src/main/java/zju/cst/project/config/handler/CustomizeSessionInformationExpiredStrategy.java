@@ -12,10 +12,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 /**
- * @Author: Hutengfei
+ * @Author: wengyifan
  * @Description: 会话信息过期策略
- * @Date Create in 2019/9/4 9:34
+ * @Date Create in 2021/1/21 7:30 下午
  */
 @Component
 public class CustomizeSessionInformationExpiredStrategy implements SessionInformationExpiredStrategy {

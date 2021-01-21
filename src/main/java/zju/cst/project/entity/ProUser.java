@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @Author: wengyifan
+ * @Description: ProUser JavaBean
+ * @Date Create in 2021/1/21 7:30 下午
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
