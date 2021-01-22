@@ -41,25 +41,25 @@ pipeline {
                 echo "单元测试完成."
             }
         }
-//         // 分发jar包，这里只是简单的通过scp分发jar包到目标机器指定目录
-//         stage("分发jar包") {
-//             steps {
-//                 echo "分发中..."
-//                 echo "chmod 600 pkey"
-//                 sh 'chmod 600 authorized_keys.pem'
-//                 echo "upload"
-//                   sh 'scp -i authorized_keys.pem ./target/*.jar root@120.27.223.34:/root/'
-//                 echo "准备部署"
-//             }
-//         }
-//         // 部署jar包
-//         stage("部署") {
-//             // 这里需要触发一个部署的webhook，可以是一个很简单的重启java进程的操作
-//             steps {
-//                 // 用curl 来触发hook
-//                 sh 'curl http://baidu.com'
-//                 echo "请登录服务器手动部署"
-//             }
-//         }
+        // 分发jar包，这里只是简单的通过scp分发jar包到目标机器指定目录
+        stage("分发jar包") {
+            steps {
+                echo "分发中..."
+                echo "chmod 600 pkey"
+                sh 'chmod 600 authorized_keys.pem'
+                echo "upload"
+                  sh 'scp -i authorized_keys.pem ./target/*.jar root@120.27.223.34:/root/'
+                echo "准备部署"
+            }
+        }
+        // 部署jar包
+        stage("部署") {
+            // 这里需要触发一个部署的webhook，可以是一个很简单的重启java进程的操作
+            steps {
+                // 用curl 来触发hook
+                sh 'curl http://baidu.com'
+                echo "请登录服务器手动部署"
+            }
+        }
     }
 }
