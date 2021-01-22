@@ -30,7 +30,7 @@ public class TestController {
         return "This is test!";
     }
 
-    @GetMapping("/test2")
+    @GetMapping("/testyifan")
     public String test2() {
         return "This is test2!";
     }
@@ -46,7 +46,6 @@ public class TestController {
         List<ProPermission> permissions = permissionService.selectListByPath("/user/getUser");
         return ResultTool.success(permissions);
     }
-
 
     @GetMapping("/update")
     public JsonResult getUser() {
