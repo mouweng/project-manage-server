@@ -58,7 +58,6 @@ pipeline {
             steps {
                 // 用curl 来触发hook
                 sh 'curl http://baidu.com'
-                sh 'll'
                 sh 'cd /root/code/project-manage-server'
                 sh 'java -jar project-0.0.1-SNAPSHOT.jar'
                 echo "请登录服务器手动部署"
