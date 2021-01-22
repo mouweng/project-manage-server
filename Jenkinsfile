@@ -48,7 +48,7 @@ pipeline {
                 echo "chmod 600 pkey"
                 sh 'chmod 600 authorized_keys.pem'
                 echo "upload"
-                  sh 'scp -i authorized_keys.pem ./target/*.jar root@120.27.223.34:/root/'
+                  sh 'scp -i authorized_keys.pem ./target/*.jar root@120.27.223.34:/root/code/project-manage-server/'
                 echo "准备部署"
             }
         }
@@ -58,6 +58,9 @@ pipeline {
             steps {
                 // 用curl 来触发hook
                 sh 'curl http://baidu.com'
+                sh 'll'
+                sh 'cd /root/code/project-manage-server'
+                sh 'java -jar project-0.0.1-SNAPSHOT.jar'
                 echo "请登录服务器手动部署"
             }
         }
