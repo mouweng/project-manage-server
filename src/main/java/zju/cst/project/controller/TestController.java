@@ -30,6 +30,11 @@ public class TestController {
         return "This is test!";
     }
 
+    @GetMapping("/test2")
+    public String test2() {
+        return "This is test2!";
+    }
+
     @GetMapping("/getPermission/{id}")
     public JsonResult getUser(@PathVariable("id") Integer id) {
         List<ProPermission> permissions = permissionService.selectListByUser(id);
