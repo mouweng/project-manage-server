@@ -105,5 +105,9 @@ public class UserController {
         return "";
     }
 
+    @GetMapping(value = "/user/test")
+    public String testUser() {
+        return "this is test";
+    }
 
 }
