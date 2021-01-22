@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        // 此处设定构建环境，目前可选有
-        // default, java-8, python-3.5, ruby-2.3, go-1.11 等
-        // 详情请阅 https://dev.tencent.com/help/knowledge-base/how-to-use-ci#agents
-        label "java-8"
-    }
+//     agent {
+//         // 此处设定构建环境，目前可选有
+//         // default, java-8, python-3.5, ruby-2.3, go-1.11 等
+//         // 详情请阅 https://dev.tencent.com/help/knowledge-base/how-to-use-ci#agents
+//         label "java-8"
+//     }
+    agent any
     stages  {
         // 检出仓库
         stage("检出") {
