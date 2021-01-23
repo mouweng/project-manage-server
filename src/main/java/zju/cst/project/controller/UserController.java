@@ -105,22 +105,4 @@ public class UserController {
         return "";
     }
 
-    /**
-     * @param
-     * @return {@link String}
-     * @throws
-     * @author: wengyifan
-     * @description: test
-     * @date: 2021/1/22 3:38 下午
-     */
-    @GetMapping(value = "/user/test")
-    public String testUser() {
-        return "this is test";
-    }
-
-    @GetMapping(value = "/user/mouweng")
-    public String mouweng() {
-        return "this is test2";
-    }
-
 }
