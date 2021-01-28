@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.DevTaskUserDao">
+
+    <resultMap type="zju.cst.project.entity.ProDevTaskUser" id="DevTaskUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="devTid" column="dev_tid" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryById" resultMap="DevTaskUserMap">
+        SELECT
+            *
+        FROM pro_dev_task_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByDevTidAndUid" resultMap="DevTaskUserMap">
+        SELECT
+            *
+        FROM pro_dev_task_user
+        WHERE dev_tid = #{tid} AND uid = #{uid}
+    </select>
+
+    <update id="update">
+        UPDATE pro_dev_task_user
+        <set>
+            <if test="devTid != null">
+                dev_tid = #{devTid},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO
+            pro_dev_task_user(dev_tid, uid)
+        VALUES(#{devTid}, #{uid})
+    </insert>
+
+    <delete id="deleteById">
+        delete from pro_dev_task_user where id = #{id}
+    </delete>
+
+</mapper>
