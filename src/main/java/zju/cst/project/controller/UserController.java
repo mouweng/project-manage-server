@@ -165,6 +165,4 @@ public class UserController {
         }
     }
 
-    // todo:权限升级-普通用户升级项目管理员
-
 }

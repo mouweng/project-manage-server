@@ -92,4 +92,5 @@ public interface UserService {
      * @date: 2021/1/30 10:37 上午
      */
     boolean deleteUser(Integer id);
+
 }
