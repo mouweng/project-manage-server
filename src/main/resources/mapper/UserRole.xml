@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.UserRoleDao">
+
+    <resultMap type="zju.cst.project.entity.ProUserRole" id="UserRoleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectByUid" resultMap="UserRoleMap">
+        SELECT
+            *
+        FROM pro_user_role
+        WHERE user_id = #{uid}
+    </select>
+
+    <update id="update">
+        UPDATE pro_user_role
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <insert id="insert">
+        INSERT
+            pro_user_role(user_id, role_id)
+        VALUES(#{userId}, #{roleId})
+    </insert>
+
+    <delete id="deleteByUid">
+        DELETE FROM
+            pro_user_role
+        WHERE user_id = #{uid}
+    </delete>
+
+</mapper>

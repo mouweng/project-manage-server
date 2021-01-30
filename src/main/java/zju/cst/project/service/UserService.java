@@ -1,6 +1,7 @@
 package zju.cst.project.service;
 
 import zju.cst.project.entity.ProUser;
+import zju.cst.project.entity.vo.UserVo;
 
 /**
  * @Author: wengyifan
@@ -30,11 +31,65 @@ public interface UserService {
 
     /**
      * @param proUser
+     * @param userVo
      * @return {@link ProUser}
      * @throws
      * @author: wengyifan
      * @description: 修改数据
      * @date: 2021/1/21 8:04 下午
      */
+    ProUser update(ProUser proUser, UserVo userVo);
+
+    /**
+     * @param proUser
+     * @return {@link ProUser}
+     * @throws
+     * @author: wengyifan
+     * @description: 修改数据
+     * @date: 2021/1/29 11:11 下午
+     */
     ProUser update(ProUser proUser);
+
+
+    /**
+     * @param userVo
+     * @param createUser
+     * @return {@link boolean}
+     * @throws
+     * @author: wengyifan
+     * @description: 创建普通用户
+     * @date: 2021/1/29 9:44 下午
+     */
+    boolean createCommonUser(UserVo userVo, ProUser createUser);
+    /**
+     * @param mUser
+     * @param user
+     * @return {@link boolean}
+     * @throws
+     * @author: wengyifan
+     * @description: 判断权限
+     * @date: 2021/1/30 10:15 上午
+     */
+    boolean compareRole(ProUser mUser, ProUser user);
+
+    /**
+     * @param mUser
+     * @param role
+     * @return {@link boolean}
+     * @throws
+     * @author: wengyifan
+     * @description: 判断权限2
+     * @date: 2021/1/30 10:16 上午
+     */
+    boolean compareRole(ProUser mUser, Integer role);
+
+    /**
+     * @param id
+     * @return {@link boolean}
+     * @throws
+     * @author: wengyifan
+     * @description: 删除用户
+     * @date: 2021/1/30 10:37 上午
+     */
+    boolean deleteUser(Integer id);
 }

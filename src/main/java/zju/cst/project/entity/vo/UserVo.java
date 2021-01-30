@@ -8,13 +8,13 @@ import java.io.Serializable;
 
 /**
  * @Author: wengyifan
- * @Description: ModifyUserVo 修改用户信息封装类Vo
+ * @Description: UserVo 修改用户信息封装类Vo
  * @Date Create in 2021/1/21 7:30 下午
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ModifyUserVo implements Serializable {
+public class UserVo implements Serializable {
     // 用户账号
     private String account;
     // 用户名
@@ -27,4 +27,7 @@ public class ModifyUserVo implements Serializable {
     private String telephone;
     // 职务
     private String position;
+
+    // 权限
+    private Integer role;
 }
