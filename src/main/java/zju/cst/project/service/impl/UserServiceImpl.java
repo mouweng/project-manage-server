@@ -164,6 +164,8 @@ public class UserServiceImpl implements UserService {
         userDao.deleteByUid(id);
         userRoleDao.deleteByUid(id);
         return true;
+    }
+
     /**
      * @return {@link List <ProUser>}
      * @description: 获取数据库中所有的用户

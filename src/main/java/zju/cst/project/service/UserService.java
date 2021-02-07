@@ -95,7 +95,6 @@ public interface UserService {
      */
     boolean deleteUser(Integer id);
 
-}
     /**
      * @return {@link List <ProUser>}
      * @description: 获取数据库中所有的用户
