@@ -94,6 +94,19 @@
         where id = #{id}
     </update>
 
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            pro_user(account, user_name, password, last_login_time, enabled, account_non_expired, account_non_locked, credentials_non_expired, create_time, update_time, create_user, update_user, photo_file, department, telephone, position)
+        VALUES(#{account}, #{userName}, #{password}, #{lastLoginTime}, #{enabled}, #{accountNonExpired}, #{accountNonLocked}, #{credentialsNonExpired}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser}, #{photoFile}, #{department}, #{telephone}, #{position})
+    </insert>
+
+    <delete id="deleteByUid">
+        DELETE FROM
+            pro_user
+        WHERE id = #{uid}
+    </delete>
+    
     <!--查询所有用户-->
     <select id="getAllUsers" resultMap="UserMap">
         select

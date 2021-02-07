@@ -3,6 +3,7 @@ package zju.cst.project.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import zju.cst.project.entity.vo.UserVo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProUser implements Serializable {
+    // 自增id
     private Integer id;
     //账号
     private String account;

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.ProjectDao">
+
+    <resultMap type="zju.cst.project.entity.ProProject" id="ProjectMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="projectManager" column="project_manager" jdbcType="INTEGER"/>
+        <result property="testLeader" column="test_leader" jdbcType="INTEGER"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+        <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="queryAll" resultMap="ProjectMap">
+        SELECT
+            *
+        FROM pro_project
+    </select>
+
+    <select id="queryById" resultMap="ProjectMap">
+        SELECT
+            *
+        FROM pro_project
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByManager" resultMap="ProjectMap">
+        SELECT
+            *
+        FROM pro_project
+        WHERE project_manager = #{uid}
+    </select>
+
+    <select id="queryByTestLeader" resultMap="ProjectMap">
+        SELECT
+            *
+        FROM pro_project
+        WHERE test_leader = #{uid}
+    </select>
+
+    <update id="update">
+        update pro_project
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="projectManager != null">
+                project_manager = #{projectManager},
+            </if>
+            <if test="testLeader != null">
+                test_leader = #{testLeader},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate},
+            </if>
+            <if test="gmtUpdate != null">
+                gmt_update = #{gmtUpdate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into pro_project(name, description, project_manager, test_leader, gmt_create, gmt_update)
+        values (#{name}, #{description}, #{projectManager}, #{testLeader}, #{gmtCreate}, #{gmtUpdate})
+    </insert>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from pro_project where id = #{id}
+    </delete>
+
+</mapper>

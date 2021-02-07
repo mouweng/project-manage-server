@@ -44,6 +44,24 @@ public interface UserDao {
     int update(ProUser proUser);
 
     /**
+     * @param proUser
+     * @return {@link int}
+     * @throws
+     * @author: wengyifan
+     * @description: 创建用户
+     * @date: 2021/1/29 9:57 下午
+     */
+    int insert(ProUser proUser);
+
+    /**
+     * @param uid
+     * @return {@link int}
+     * @throws
+     * @author: wengyifan
+     * @description: 根据uid删除用户
+     * @date: 2021/1/30 10:38 上午
+     */
+    int deleteByUid(Integer uid);
      * @return {@link List<ProUser>}
      * @description: 获取数据库中所有的用户
      * @author: Huachang Yu

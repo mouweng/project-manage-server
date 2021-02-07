@@ -34,8 +34,6 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         User userDetails = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ProUser proUser = userService.selectByName(userDetails.getUsername());
         proUser.setLastLoginTime(new Date());
-        proUser.setUpdateTime(new Date());
-        proUser.setUpdateUser(proUser.getId());
         userService.update(proUser);
 
         //此处还可以进行一些处理，比如登录成功之后可能需要返回给前台当前用户有哪些菜单权限，
