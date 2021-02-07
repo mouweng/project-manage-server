@@ -3,6 +3,8 @@ package zju.cst.project.service;
 import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.UserVo;
 
+import java.util.List;
+
 /**
  * @Author: wengyifan
  * @Description: UserService 接口
@@ -93,4 +95,11 @@ public interface UserService {
      */
     boolean deleteUser(Integer id);
 
+}
+    /**
+     * @return {@link List <ProUser>}
+     * @description: 获取数据库中所有的用户
+     * @author: Huachang Yu
+     */
+    List<ProUser> getAllUsers();
 }

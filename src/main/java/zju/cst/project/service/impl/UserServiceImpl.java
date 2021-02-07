@@ -12,6 +12,7 @@ import zju.cst.project.service.UserService;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: wengyifan
@@ -163,5 +164,13 @@ public class UserServiceImpl implements UserService {
         userDao.deleteByUid(id);
         userRoleDao.deleteByUid(id);
         return true;
+    /**
+     * @return {@link List <ProUser>}
+     * @description: 获取数据库中所有的用户
+     * @author: Huachang Yu
+     */
+    @Override
+    public List<ProUser> getAllUsers() {
+        return this.userDao.getAllUsers();
     }
 }

@@ -4,6 +4,8 @@ package zju.cst.project.dao;
 import org.mapstruct.Mapper;
 import zju.cst.project.entity.ProUser;
 
+import java.util.List;
+
 /**
  * @Author: wengyifan
  * @Description: User数据接口层
@@ -60,4 +62,9 @@ public interface UserDao {
      * @date: 2021/1/30 10:38 上午
      */
     int deleteByUid(Integer uid);
+     * @return {@link List<ProUser>}
+     * @description: 获取数据库中所有的用户
+     * @author: Huachang Yu
+     */
+    List<ProUser> getAllUsers();
 }
