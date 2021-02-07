@@ -7,6 +7,7 @@ import zju.cst.project.entity.ProUser;
 import zju.cst.project.service.UserService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: wengyifan
@@ -56,5 +57,15 @@ public class UserServiceImpl implements UserService {
     public ProUser update(ProUser proUser) {
         this.userDao.update(proUser);
         return this.queryById(proUser.getId());
+    }
+
+    /**
+     * @return {@link List <ProUser>}
+     * @description: 获取数据库中所有的用户
+     * @author: Huachang Yu
+     */
+    @Override
+    public List<ProUser> getAllUsers() {
+        return this.userDao.getAllUsers();
     }
 }

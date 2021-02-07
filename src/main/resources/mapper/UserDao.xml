@@ -93,4 +93,11 @@
         </set>
         where id = #{id}
     </update>
+
+    <!--查询所有用户-->
+    <select id="getAllUsers" resultMap="UserMap">
+        select
+            *
+        from pro_user
+    </select>
 </mapper>

@@ -1,6 +1,6 @@
 package zju.cst.project.controller;
 
-import org.omg.CORBA.NO_PERMISSION;
+//import org.omg.CORBA.NO_PERMISSION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +15,7 @@ import zju.cst.project.entity.vo.ModifyUserVo;
 import zju.cst.project.service.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * @Author: wengyifan
@@ -103,6 +104,16 @@ public class UserController {
     public String currentUserName(Principal principal) {
         if (principal != null) return principal.getName();
         return "";
+    }
+
+    /**
+     * @return {@link List <ProUser>}
+     * @description: 获取数据库中所有的用户
+     * @author: Huachang Yu
+     */
+    @GetMapping( value = "/user/all")
+    public List<ProUser> getAllUser(Principal principal) {
+        return this.userService.getAllUsers();
     }
 
 }
