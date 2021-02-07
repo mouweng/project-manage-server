@@ -2,6 +2,8 @@ package zju.cst.project.service;
 
 import zju.cst.project.entity.ProUser;
 
+import java.util.List;
+
 /**
  * @Author: wengyifan
  * @Description: UserService 接口
@@ -37,4 +39,11 @@ public interface UserService {
      * @date: 2021/1/21 8:04 下午
      */
     ProUser update(ProUser proUser);
+
+    /**
+     * @return {@link List <ProUser>}
+     * @description: 获取数据库中所有的用户
+     * @author: Huachang Yu
+     */
+    List<ProUser> getAllUsers();
 }
