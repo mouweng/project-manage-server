@@ -29,7 +29,7 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
 
         // todo: 把后方的数字id给去掉
-        System.out.println("requestUrl: " + requestUrl);
+        // System.out.println("requestUrl: " + requestUrl);
         requestUrl = deleteNum(requestUrl);
 
         // 查询具体某个接口的权限

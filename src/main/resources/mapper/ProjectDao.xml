@@ -6,8 +6,6 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
-        <result property="projectManager" column="project_manager" jdbcType="INTEGER"/>
-        <result property="testLeader" column="test_leader" jdbcType="INTEGER"/>
         <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
         <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -26,19 +24,6 @@
         WHERE id = #{id}
     </select>
 
-    <select id="queryByManager" resultMap="ProjectMap">
-        SELECT
-            *
-        FROM pro_project
-        WHERE project_manager = #{uid}
-    </select>
-
-    <select id="queryByTestLeader" resultMap="ProjectMap">
-        SELECT
-            *
-        FROM pro_project
-        WHERE test_leader = #{uid}
-    </select>
 
     <update id="update">
         update pro_project
@@ -48,12 +33,6 @@
             </if>
             <if test="description != null and description != ''">
                 description = #{description},
-            </if>
-            <if test="projectManager != null">
-                project_manager = #{projectManager},
-            </if>
-            <if test="testLeader != null">
-                test_leader = #{testLeader},
             </if>
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate},
@@ -65,15 +44,25 @@
         where id = #{id}
     </update>
 
-
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into pro_project(name, description, project_manager, test_leader, gmt_create, gmt_update)
-        values (#{name}, #{description}, #{projectManager}, #{testLeader}, #{gmtCreate}, #{gmtUpdate})
+        insert into pro_project(name, description, gmt_create, gmt_update)
+        values (#{name}, #{description}, #{gmtCreate}, #{gmtUpdate})
     </insert>
 
     <!--通过主键删除-->
     <delete id="deleteById">
         delete from pro_project where id = #{id}
     </delete>
+
+    <select id="queryProjectByUidAndType" resultMap="ProjectMap">
+        SELECT
+            p.*
+        FROM
+            pro_project AS p
+        LEFT JOIN pro_project_user AS pu
+        ON p.id = pu.pid
+        WHERE pu.uid = #{uid} AND pu.type = #{type}
+    </select>
+
 
 </mapper>

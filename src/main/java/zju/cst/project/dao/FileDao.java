@@ -71,4 +71,8 @@ public interface FileDao {
      * @date: 2021/1/28 4:13 下午
      */
     int deleteByPid(Integer pid);
+
+    int queryByFileNameAndPid(String fileName, Integer pid);
+
+    ProFile queryByIdAndPid(Integer id, Integer pid);
 }

@@ -12,7 +12,9 @@ import zju.cst.project.service.UserService;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: wengyifan
@@ -174,5 +176,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<ProUser> getAllUsers() {
         return this.userDao.getAllUsers();
+    }
+
+    @Override
+    public Map<Integer, List<ProUser>> queryUserByPid(Integer id) {
+        Map<Integer, List<ProUser>> map = new HashMap<>();
+        map.put(1, userDao.queryUserByPidAndType(id, 1));
+        map.put(2, userDao.queryUserByPidAndType(id, 2));
+        map.put(3, userDao.queryUserByPidAndType(id, 3));
+        return map;
     }
 }

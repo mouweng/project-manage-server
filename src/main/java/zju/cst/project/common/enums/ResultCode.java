@@ -34,9 +34,17 @@ public enum ResultCode {
     USER_ACCOUNT_NOT_EXIST(2007, "账号不存在"),
     USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
+    USER_NOT_EXIST(2010,"用户不存在"),
 
     /* 业务错误 */
-    NO_PERMISSION(3001, "没有权限");
+    NO_PERMISSION(3001, "没有权限"),
+    USER_EXIST_IN_PROJECT(3002, "用户已经存在项目组中"),
+    DELETE_ERROR(3003, "删除失败"),
+    FILE_EXIST(3004, "文件存在"),
+    FILE_NOT_EXIST(3005, "文件不存在"),
+    FILE_UPLOAD_ERROR(3006, "文件上传失败"),
+    FILE_UPLOAD_REPEAT(3007, "文件重复上传"),
+    FILE_DOWNLOAD_ERROR(3008, "文件下载失败"),;
     private Integer code;
     private String message;
 

@@ -6,6 +6,7 @@ import zju.cst.project.dao.UserDao;
 import zju.cst.project.entity.ProUser;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: wengyifan
@@ -30,4 +31,19 @@ public class UserTest {
         System.out.println(user);
     }
 
+    @Test
+    public void test3() {
+        List<ProUser> proUsers1 = userDao.queryUserByPidAndType(1,1);
+        List<ProUser> proUsers2 = userDao.queryUserByPidAndType(1, 2);
+        List<ProUser> proUsers3 = userDao.queryUserByPidAndType(1, 3);
+        for (ProUser proUser : proUsers1) {
+            System.out.println(proUser);
+        }
+        for (ProUser proUser : proUsers2) {
+            System.out.println(proUser);
+        }
+        for (ProUser proUser : proUsers3) {
+            System.out.println(proUser);
+        }
+    }
 }

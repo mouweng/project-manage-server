@@ -107,7 +107,7 @@ public class UserController {
      */
     @PostMapping("/user/createUser")
     public JsonResult createUser(UserVo userVo, Principal principal) {
-
+        if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         // 获取创建者信息
         String createUserName = principal.getName();
         ProUser createUser = userService.selectByName(createUserName);
@@ -154,6 +154,7 @@ public class UserController {
      */
     @GetMapping("/user/deleteUser/{id}")
     public JsonResult deleteUser(@PathVariable("id") Integer id, Principal principal) {
+        if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         // 判断账号是否存在
         ProUser user = userService.queryById(id);
         if (user == null) return ResultTool.fail(ResultCode.USER_ACCOUNT_NOT_EXIST);
@@ -176,5 +177,4 @@ public class UserController {
     public List<ProUser> getAllUser(Principal principal) {
         return this.userService.getAllUsers();
     }
-
 }

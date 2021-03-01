@@ -5,9 +5,11 @@
     <resultMap type="zju.cst.project.entity.ProFile" id="FileMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="pid" column="pid" jdbcType="INTEGER"/>
+        <result property="uid" column="uid" jdbcType="INTEGER"/>
         <result property="filePath" column="file_path" jdbcType="VARCHAR"/>
         <result property="fileName" column="file_name" jdbcType="VARCHAR"/>
         <result property="suffix" column="suffix" jdbcType="VARCHAR"/>
+        <result property="downloadTimes" column="download_times" jdbcType="INTEGER"/>
         <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
         <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -32,6 +34,9 @@
             <if test="pid != null">
                 pid = #{pid},
             </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
             <if test="filePath != null and filePath != ''">
                 file_path = #{filePath},
             </if>
@@ -40,6 +45,9 @@
             </if>
             <if test="suffix != null and suffix != ''">
                 suffix = #{suffix},
+            </if>
+            <if test="downloadTimes != null">
+                download_times = #{downloadTimes},
             </if>
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate},
@@ -53,8 +61,8 @@
 
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into pro_file(pid, file_path, file_name, suffix, gmt_create, gmt_update)
-        values (#{pid}, #{filePath}, #{fileName}, #{suffix}, #{gmtCreate}, #{gmtUpdate})
+        insert into pro_file(pid, uid, file_path, file_name, suffix, gmt_create, gmt_update)
+        values (#{pid}, #{uid}, #{filePath}, #{fileName}, #{suffix}, #{gmtCreate}, #{gmtUpdate})
     </insert>
 
     <!--通过主键删除-->
@@ -66,5 +74,18 @@
     <delete id="deleteByPid">
         delete from pro_file where pid = #{pid}
     </delete>
+
+    <select id="queryByFileNameAndPid" resultType="integer">
+        SELECT COUNT(*)
+        FROM pro_file
+        WHERE file_name = #{fileName} AND pid = #{pid}
+    </select>
+
+    <select id="queryByIdAndPid" resultMap="FileMap">
+        SELECT
+            *
+        FROM pro_file
+        WHERE id = #{id} AND pid = #{pid}
+    </select>
 
 </mapper>

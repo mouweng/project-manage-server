@@ -24,7 +24,9 @@ public class ProjectTest {
     @Test
     public void test1() {
         List<ProProject> proProjects = projectDao.queryAll();
-        System.out.println(proProjects);
+        for (ProProject proProject : proProjects) {
+            System.out.println(proProject);
+        }
     }
 
     @Test
@@ -33,27 +35,13 @@ public class ProjectTest {
         System.out.println(proProject);
     }
 
-    @Test
-    public void test3() {
-        List<ProProject> proProjects = projectDao.queryByManager(2);
-        System.out.println(proProjects);
-    }
-
-    @Test
-    public void test4() {
-        List<ProProject> proProjects = projectDao.queryByTestLeader(3);
-        System.out.println(proProjects);
-    }
 
     @Test
     public void test5() {
         ProProject proProject = projectDao.queryById(3);
         System.out.println(proProject);
-        proProject.setName("redis-java");
-        proProject.setDescription("personal");
-        proProject.setProjectManager(2);
-        proProject.setTestLeader(3);
-        proProject.setGmtCreate(new Date());
+        proProject.setName("redis");
+        proProject.setDescription("fine");
         proProject.setGmtUpdate(new Date());
         projectDao.update(proProject);
     }
@@ -61,10 +49,8 @@ public class ProjectTest {
     @Test
     public void test6() {
         ProProject proProject = new ProProject();
-        proProject.setName("redis-java");
-        proProject.setDescription("personal");
-        proProject.setProjectManager(2);
-        proProject.setTestLeader(3);
+        proProject.setName("javaxxx");
+        proProject.setDescription("wyf");
         proProject.setGmtCreate(new Date());
         proProject.setGmtUpdate(new Date());
         projectDao.insert(proProject);
@@ -72,7 +58,38 @@ public class ProjectTest {
 
     @Test
     public void test7() {
-        projectDao.deleteById(4);
+        projectDao.deleteById(6);
+    }
+
+    @Test
+    public void test8() {
+        List<ProProject> proProjects = projectDao.queryProjectByUidAndType(2, 1);
+        for (ProProject proProject : proProjects) {
+            System.out.println(proProject);
+        }
+    }
+
+    @Test
+    public void test9() {
+        List<ProProject> proProjects = projectDao.queryProjectByUidAndType(3, 2);
+        for (ProProject proProject : proProjects) {
+            System.out.println(proProject);
+        }
+    }
+
+    @Test
+    public void test10() {
+        List<ProProject> proProjects = projectDao.queryProjectByUidAndType(3, 3);
+        for (ProProject proProject : proProjects) {
+            System.out.println(proProject);
+        }
+    }
+
+    @Test
+    public void test11() {
+        ProProject proProject = projectDao.queryById(1);
+        int num = projectDao.insert(proProject);
+        System.out.println(proProject.getId());
     }
 
 }

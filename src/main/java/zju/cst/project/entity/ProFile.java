@@ -20,12 +20,16 @@ public class ProFile implements Serializable {
     private Integer id;
     // 项目id
     private Integer pid;
+    // 上传者uid
+    private Integer uid;
     // 文件路径
     private String filePath;
     // 文件名
     private String fileName;
     // 文件后缀
     private String suffix;
+    // 下载次数
+    private Integer downloadTimes;
     // 创建时间
     private Date gmtCreate;
     // 修改时间

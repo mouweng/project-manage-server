@@ -113,4 +113,13 @@
             *
         from pro_user
     </select>
+
+    <select id="queryUserByPidAndType" resultMap="UserMap">
+        SELECT
+            u.*
+        FROM pro_project_user AS pu
+        LEFT JOIN pro_user AS u
+        ON pu.uid = u.id
+        WHERE pu.pid = #{id} AND pu.type = #{type}
+    </select>
 </mapper>

@@ -4,6 +4,7 @@ import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.UserVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: wengyifan
@@ -101,4 +102,7 @@ public interface UserService {
      * @author: Huachang Yu
      */
     List<ProUser> getAllUsers();
+
+
+    Map<Integer, List<ProUser>> queryUserByPid(Integer id);
 }
