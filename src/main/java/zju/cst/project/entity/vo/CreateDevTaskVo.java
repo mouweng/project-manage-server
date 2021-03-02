@@ -16,6 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateDevTaskVo implements Serializable {
+    // 任务自增id
+    private Integer devTid;
     // uid
     private Integer uid;
     // pid

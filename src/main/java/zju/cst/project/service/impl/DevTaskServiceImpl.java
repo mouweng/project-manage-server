@@ -82,4 +82,24 @@ public class DevTaskServiceImpl implements DevTaskService {
         proDevTask.setGmtUpdate(new Date());
         return devTaskDao.update(proDevTask) > 0 ? true : false;
     }
+
+    @Override
+    public List<ProDevTask> queryDevTaskByUidAndStatus(Integer uid, Integer status) {
+        return devTaskDao.queryDevTaskByUidAndStatus(uid, status);
+    }
+
+    @Override
+    public List<ProDevTask> queryDevTaskByPidAndStatus(Integer pid, Integer status) {
+        return devTaskDao.queryDevTaskByPidAndStatus(pid, status);
+    }
+
+    @Override
+    public boolean updateDevTask(CreateDevTaskVo createDevTaskVo) {
+        ProDevTask proDevTask = new ProDevTask();
+        proDevTask.setId(createDevTaskVo.getDevTid());
+        proDevTask.setContent(createDevTaskVo.getContent());
+        proDevTask.setSelfTest(createDevTaskVo.getSelfTest());
+        proDevTask.setGmtUpdate(new Date());
+        return devTaskDao.update(proDevTask) > 0 ? true : false;
+    }
 }

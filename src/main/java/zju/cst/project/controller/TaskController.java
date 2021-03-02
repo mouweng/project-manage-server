@@ -69,11 +69,29 @@ public class TaskController {
         return ResultTool.success(devTaskService.queryDevTaskByUid(uid));
     }
 
-    // todo:根据uid和完成情况查询任务
+    // 根据uid和完成情况查询任务
+    // 传递参数：uid（用户id）, devTid（任务id）
+    @GetMapping("/devTask/queryDevTaskByUidAndStatus/{uid}/{status}")
+    public JsonResult queryDevTaskByUidAndStatus(@PathVariable("uid") Integer uid, @PathVariable("status") Integer status) {
+        return ResultTool.success(devTaskService.queryDevTaskByUidAndStatus(uid, status));
+    }
 
-    // todo:根据pid和完成情况查询任务
 
-    // todo:更改任务信息
+    // 根据pid和完成情况查询任务
+    // 传递参数：pid（项目id）, devTid（任务id）
+    @GetMapping("/devTask/queryDevTaskByPidAndStatus/{pid}/{status}")
+    public JsonResult queryDevTaskByPidAndStatus(@PathVariable("pid") Integer pid, @PathVariable("status") Integer status) {
+        return ResultTool.success(devTaskService.queryDevTaskByPidAndStatus(pid, status));
+    }
+
+    // 更改任务信息
+    // 传递参数：devTid（任务id）, content（任务内容）, selfTest（自测内容）
+    @PostMapping("/devTask/updateDevTask")
+    public JsonResult updateDevTask(CreateDevTaskVo createDevTaskVo) {
+        boolean res = devTaskService.updateDevTask(createDevTaskVo);
+        if(res) return ResultTool.success("任务修改成功");
+        else return ResultTool.fail(ResultCode.COMMON_FAIL);
+    }
 
 
     // 更改任务状态（待处理/进行中/已完成）

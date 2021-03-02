@@ -73,4 +73,7 @@ public interface DevTaskDao {
      */
     int deleteById(Integer id);
 
+    List<ProDevTask> queryDevTaskByUidAndStatus(Integer uid, Integer status);
+
+    List<ProDevTask> queryDevTaskByPidAndStatus(Integer pid, Integer status);
 }

@@ -26,4 +26,10 @@ public interface DevTaskService {
     List<ProDevTask> queryDevTaskByPid(Integer pid);
 
     boolean updateDevTaskStatus(Integer devTid, Integer status);
+
+    List<ProDevTask> queryDevTaskByUidAndStatus(Integer uid, Integer status);
+
+    List<ProDevTask> queryDevTaskByPidAndStatus(Integer pid, Integer status);
+
+    boolean updateDevTask(CreateDevTaskVo createDevTaskVo);
 }
