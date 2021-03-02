@@ -45,4 +45,7 @@
         delete from pro_dev_task_user where id = #{id}
     </delete>
 
+    <delete id="deleteByDevTid">
+        delete from pro_dev_task_user where dev_tid = #{devTid}
+    </delete>
 </mapper>

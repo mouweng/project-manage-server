@@ -47,6 +47,7 @@ public class FileController {
      */
     @PostMapping("/file/upload/{pid}")
     public JsonResult upload(@RequestParam("files") MultipartFile files[], @PathVariable("pid") Integer pid, Principal principal) {
+
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         // 获取当前登录用户
         String principalUserName = principal.getName();
@@ -99,7 +100,7 @@ public class FileController {
         String principalUserName = principal.getName();
         ProUser principalUser = userService.selectByName(principalUserName);
 
-        // 验证是否可以下载文件（验证这个人是否在这个项目中，在这个项目中才可以上传这个项目的文件）
+        // 验证是否可以下载文件（验证这个人是否在这个项目中，在这个项目中才可以下载这个项目的文件）
         Integer principalUid = principalUser.getId();
         if (!projectService.queryProjectUserByUidPid(principalUid, pid)) {
             return ResultTool.fail(ResultCode.NO_PERMISSION);
@@ -144,7 +145,7 @@ public class FileController {
         String principalUserName = principal.getName();
         ProUser principalUser = userService.selectByName(principalUserName);
 
-        // 验证是否可以删除文件（验证这个人是否在这个项目中，在这个项目中才可以上传这个项目的文件）
+        // 验证是否可以删除文件（验证这个人是否在这个项目中）
         Integer principalUid = principalUser.getId();
         if (!projectService.queryProjectUserByUidPid(principalUid, pid)) {
             return ResultTool.fail(ResultCode.NO_PERMISSION);
@@ -173,7 +174,7 @@ public class FileController {
         String principalUserName = principal.getName();
         ProUser principalUser = userService.selectByName(principalUserName);
 
-        // 验证是否可以查询文件（验证这个人是否在这个项目中，在这个项目中才可以上传这个项目的文件）
+        // 验证是否可以查询文件（验证这个人是否在这个项目中）
         Integer principalUid = principalUser.getId();
         if (!projectService.queryProjectUserByUidPid(principalUid, pid)) {
             return ResultTool.fail(ResultCode.NO_PERMISSION);

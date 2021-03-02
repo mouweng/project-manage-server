@@ -61,4 +61,13 @@ public interface DevTaskUserDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * @param devTid
+     * @return {@link int}
+     * @throws
+     * @author: wengyifan
+     * @description: 根据devTid删除
+     * @date: 2021/1/28 8:32 下午
+     */
+    int deleteByDevTid(Integer devTid);
 }
