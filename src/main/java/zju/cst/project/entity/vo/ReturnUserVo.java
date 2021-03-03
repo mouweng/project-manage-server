@@ -1,22 +1,23 @@
-package zju.cst.project.entity;
+package zju.cst.project.entity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import zju.cst.project.entity.vo.UserVo;
+import zju.cst.project.entity.ProProject;
+import zju.cst.project.entity.ProUser;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
- * @Author: wengyifan
- * @Description: ProUser JavaBean
- * @Date Create in 2021/1/21 7:30 下午
+ * @author: wengyifan
+ * @description:
+ * @date: 2021/3/3 10:24 上午
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProUser implements Serializable {
+public class ReturnUserVo extends ProUser {
     // 自增id
     private Integer id;
     //账号
@@ -52,4 +53,26 @@ public class ProUser implements Serializable {
     //职务
     private String position;
 
+
+    private List<ProProject> projects;
+
+    public ReturnUserVo(ProUser proUser) {
+        id = proUser.getId();
+        account = proUser.getAccount();
+        userName = proUser.getUserName();
+        password = proUser.getPassword();
+        lastLoginTime = proUser.getLastLoginTime();
+        enabled = proUser.getEnabled();
+        accountNonExpired = proUser.getAccountNonExpired();
+        accountNonLocked = proUser.getAccountNonLocked();
+        credentialsNonExpired = proUser.getCredentialsNonExpired();
+        createTime = proUser.getCreateTime();
+        updateTime = proUser.getUpdateTime();
+        createUser = proUser.getCreateUser();
+        updateUser = proUser.getUpdateUser();
+        photoFile = proUser.getPhotoFile();
+        department = proUser.getDepartment();
+        telephone = proUser.getTelephone();
+        position = proUser.getPosition();
+    }
 }

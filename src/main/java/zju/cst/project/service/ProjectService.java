@@ -110,4 +110,6 @@ public interface ProjectService {
     int createProject(ProjectVo projectVo);
 
     void deleteProject(Integer id);
+
+    List<ProProject> queryByUidAll(Integer id);
 }

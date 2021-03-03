@@ -9,7 +9,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import zju.cst.project.entity.ProProject;
 import zju.cst.project.entity.ProUser;
+import zju.cst.project.entity.vo.ReturnUserVo;
+import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.UserService;
 
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: wengyifan
@@ -27,6 +31,9 @@ import java.util.Date;
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ProjectService projectService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
@@ -40,7 +47,11 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         //进而前台动态的控制菜单的显示等，具体根据自己的业务需求进行扩展
 
         //返回json数据
-        JsonResult result = ResultTool.success(userService.selectByName(userDetails.getUsername()));
+        ReturnUserVo returnUserVo = new ReturnUserVo(proUser);
+        List<ProProject> proProjects = projectService.queryByUidAll(returnUserVo.getId());
+        returnUserVo.setProjects(proProjects);
+
+        JsonResult result = ResultTool.success(returnUserVo);
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));
     }

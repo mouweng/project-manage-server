@@ -57,6 +57,15 @@ public class ProjectServiceImpl implements ProjectService {
         return map;
     }
 
+    @Override
+    public List<ProProject> queryByUidAll(Integer uid) {
+        List<ProProject> proProjects = new ArrayList<>();
+        proProjects.addAll(projectDao.queryProjectByUidAndType(uid, 1));
+        proProjects.addAll(projectDao.queryProjectByUidAndType(uid, 2));
+        proProjects.addAll(projectDao.queryProjectByUidAndType(uid, 3));
+        return proProjects;
+    }
+
     /**
      * @param id
      * @return {@link ProProject}
