@@ -14,7 +14,7 @@ import zju.cst.project.service.DevTaskService;
  * @date: 2021/3/1 10:59 下午
  */
 @RestController
-public class TaskController {
+public class DevTaskController {
 
     @Autowired
     DevTaskService devTaskService;
