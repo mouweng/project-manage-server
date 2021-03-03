@@ -10,7 +10,7 @@ import java.util.List;
  * @date: 2021/3/1 6:53 下午
  */
 public interface FileService {
-    void AddFile(String fileName, String filePath, Integer pid, Integer uid);
+    void AddFile(String fileName, String filePath, Integer pid, Integer uid, Long size);
 
     boolean repeatUpload(String fileName, Integer pid);
 

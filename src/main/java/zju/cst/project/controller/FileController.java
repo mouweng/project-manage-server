@@ -2,8 +2,11 @@ package zju.cst.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
@@ -34,6 +37,7 @@ public class FileController {
     FileService fileService;
     @Value("${file.path}")
     private String path;
+
 
     /**
      * @param files
@@ -76,7 +80,7 @@ public class FileController {
             try {
                 file.transferTo(dest);
                 // 插入文件信息
-                fileService.AddFile(fileName, filePath, pid, principalUser.getId());
+                fileService.AddFile(fileName, filePath, pid, principalUser.getId(), file.getSize());
             } catch (IOException e) {
                 e.printStackTrace();
                 return ResultTool.fail(ResultCode.FILE_UPLOAD_ERROR);
@@ -95,6 +99,7 @@ public class FileController {
      */
     @GetMapping("/file/download/{pid}/{id}")
     public JsonResult download(HttpServletResponse response, @PathVariable("pid") Integer pid, @PathVariable("id") Integer id, Principal principal) {
+
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         // 获取当前登录用户
         String principalUserName = principal.getName();
@@ -118,7 +123,13 @@ public class FileController {
         response.setContentType("application/octet-stream");
         response.setCharacterEncoding("utf-8");
         response.setContentLength((int) file.length());
-        response.setHeader("Content-Disposition", "attachment;filename=" + proFile.getFileName());
+        // 解决文件中文乱码问题
+        // response.setHeader("Content-Disposition", "attachment;filename=" + proFile.getFileName());
+        try {
+            response.setHeader("Content-Disposition","attachment;fileName=" +new String(proFile.getFileName().getBytes("UTF-8"),"iso-8859-1"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
             byte[] buff = new byte[1024];

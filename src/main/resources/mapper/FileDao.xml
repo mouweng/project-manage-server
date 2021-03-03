@@ -9,6 +9,7 @@
         <result property="filePath" column="file_path" jdbcType="VARCHAR"/>
         <result property="fileName" column="file_name" jdbcType="VARCHAR"/>
         <result property="suffix" column="suffix" jdbcType="VARCHAR"/>
+        <result property="size" column="size" jdbcType="BIGINT"/>
         <result property="downloadTimes" column="download_times" jdbcType="INTEGER"/>
         <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
         <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
@@ -46,6 +47,9 @@
             <if test="suffix != null and suffix != ''">
                 suffix = #{suffix},
             </if>
+            <if test="size != null and size != ''">
+                size = #{size},
+            </if>
             <if test="downloadTimes != null">
                 download_times = #{downloadTimes},
             </if>
@@ -61,8 +65,8 @@
 
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into pro_file(pid, uid, file_path, file_name, suffix, gmt_create, gmt_update)
-        values (#{pid}, #{uid}, #{filePath}, #{fileName}, #{suffix}, #{gmtCreate}, #{gmtUpdate})
+        insert into pro_file(pid, uid, file_path, file_name, size, suffix, gmt_create, gmt_update)
+        values (#{pid}, #{uid}, #{filePath}, #{fileName}, #{size}, #{suffix}, #{gmtCreate}, #{gmtUpdate})
     </insert>
 
     <!--通过主键删除-->

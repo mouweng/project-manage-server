@@ -27,6 +27,8 @@ public class ProFile implements Serializable {
     private String filePath;
     // 文件名
     private String fileName;
+    // 文件大小
+    private Long size;
     // 文件后缀
     private String suffix;
     // 下载次数
