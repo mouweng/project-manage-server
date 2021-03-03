@@ -1,5 +1,6 @@
 package zju.cst.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProUser implements Serializable {
+public class ProUser implements Serializable{
     // 自增id
     private Integer id;
     //账号
@@ -26,6 +27,7 @@ public class ProUser implements Serializable {
     //用户密码
     private String password;
     //上一次登录时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lastLoginTime;
     //账号是否可用。默认为1（可用）
     private Boolean enabled;
@@ -36,8 +38,10 @@ public class ProUser implements Serializable {
     //证书（密码）是否过期。默认为1（没有过期）
     private Boolean credentialsNonExpired;
     //创建时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
     //修改时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
     //创建人
     private Integer createUser;

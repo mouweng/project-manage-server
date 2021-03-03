@@ -1,6 +1,7 @@
 package zju.cst.project.config.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.utils.ResultTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +51,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         ReturnUserVo returnUserVo = new ReturnUserVo(proUser);
         List<ProProject> proProjects = projectService.queryByUidAll(returnUserVo.getId());
         returnUserVo.setProjects(proProjects);
-
         JsonResult result = ResultTool.success(returnUserVo);
         httpServletResponse.setContentType("text/json;charset=utf-8");
-        httpServletResponse.getWriter().write(JSON.toJSONString(result));
+        // httpServletResponse.getWriter().write(JSON.toJSONString(result));
+        httpServletResponse.getWriter().write(JSON.toJSONString(result, SerializerFeature.WriteDateUseDateFormat));
     }
 }
