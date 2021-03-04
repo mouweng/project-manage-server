@@ -34,16 +34,13 @@ public class FileDfsUtil {
     /**
      * 删除文件
      */
-    public void deleteFile(String fileUrl) {
+    public boolean deleteFile(String fileUrl) {
         if (StringUtils.isEmpty(fileUrl)) {
-            System.out.println("fileUrl == >>文件路径为空...");
-            return;
+            // System.out.println("fileUrl == >>文件路径为空...");
+            return false;
         }
-        try {
-            StorePath storePath = StorePath.parseFromUrl(fileUrl);
-            storageClient.deleteFile(storePath.getGroup(), storePath.getPath());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        StorePath storePath = StorePath.parseFromUrl(fileUrl);
+        storageClient.deleteFile(storePath.getGroup(), storePath.getPath());
+        return true;
     }
 }

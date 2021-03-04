@@ -202,7 +202,8 @@ public class FileController {
         file.delete();
         */
         // 文件删除
-        fileDfsUtil.deleteFile(proFile.getSuffix());
+        boolean res = fileDfsUtil.deleteFile(proFile.getSuffix());
+        if (!res) return ResultTool.fail(ResultCode.FILE_NOT_EXIST);
 
         // 数据库中删除文件记录
         fileService.deleteFile(proFile.getId());
