@@ -23,6 +23,24 @@ public interface DevTaskDao {
     int getDevTaskNum();
 
     /**
+     * @return java.util.List<zju.cst.project.entity.ProDevTask>
+     * @throws
+     * @author xushifeng
+     * @description： 统计近7天任务创建情况
+     * @date 2021/3/5 3:32 下午
+     */
+    List<ProDevTask> getTaskCreatedInAWeek();
+
+    /**
+     * @return java.util.List<zju.cst.project.entity.ProDevTask>
+     * @throws
+     * @author xushifeng
+     * @description: 统计近7天任务完成情况
+     * @date 2021/3/5 3:32 下午
+     */
+    List<ProDevTask> getTaskFinishedInAWeek();
+
+    /**
      * @param id
      * @return {@link ProDevTask}
      * @throws
