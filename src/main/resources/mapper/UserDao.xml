@@ -22,6 +22,12 @@
         <result property="position" column="position" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="getUserNum" resultType="int">
+        select
+            count(*)
+        from pro_user
+    </select>
+
     <!--按照id查询-->
     <select id="queryById" resultMap="UserMap">
         select

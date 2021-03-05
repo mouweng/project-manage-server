@@ -13,6 +13,15 @@ import java.util.Map;
  */
 public interface UserService {
     /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description: 获得用户总数
+     * @date 2021/3/4 2:15 下午
+     */
+    int getUserNum();
+
+    /**
      * @param id
      * @return {@link ProUser}
      * @throws

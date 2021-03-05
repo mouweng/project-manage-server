@@ -14,6 +14,15 @@ import java.util.List;
 public interface DevTaskDao {
 
     /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description
+     * @date 2021/3/4 9:42 下午
+     */
+    int getDevTaskNum();
+
+    /**
      * @param id
      * @return {@link ProDevTask}
      * @throws

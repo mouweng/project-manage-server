@@ -1,8 +1,10 @@
 package zju.cst.project.service;
 
 import zju.cst.project.entity.ProFile;
+import zju.cst.project.entity.ProUser;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wengyifan
@@ -10,6 +12,12 @@ import java.util.List;
  * @date: 2021/3/1 6:53 下午
  */
 public interface FileService {
+    int getFileNum();
+
+    List<ProFile> getAllFiles();
+
+    Integer getTotalDownloadTimes();
+
     void AddFile(String fileName, String filePath, Integer pid, Integer uid, Long size);
 
     boolean repeatUpload(String fileName, Integer pid);

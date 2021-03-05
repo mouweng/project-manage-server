@@ -26,6 +26,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Resource
     private ProjectUserDao projectUserDao;
 
+    /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description
+     * @date 2021/3/3 8:49 下午
+     */
+    @Override
+    public int getProjectNum(){return projectDao.getProjectNum();}
 
     /**
      * @param

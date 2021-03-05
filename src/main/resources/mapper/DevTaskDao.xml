@@ -18,6 +18,12 @@
         <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="getDevTaskNum" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM pro_dev_task
+    </select>
+
     <select id="queryById" resultMap="DevTaskMap">
         SELECT
             *

@@ -26,6 +26,11 @@ public class DevTaskServiceImpl implements DevTaskService {
     DevTaskUserDao devTaskUserDao;
 
     @Override
+    public int getDevTaskNum(){
+        return devTaskDao.getDevTaskNum();
+    }
+
+    @Override
     public int createDevTask(CreateDevTaskVo createDevTaskVo) {
         ProDevTask proDevTask = new ProDevTask();
         proDevTask.setContent(createDevTaskVo.getContent());

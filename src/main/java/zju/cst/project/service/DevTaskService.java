@@ -11,6 +11,9 @@ import java.util.List;
  * @date: 2021/3/2 8:23 下午
  */
 public interface DevTaskService {
+
+    int getDevTaskNum();
+
     int createDevTask(CreateDevTaskVo createDevTaskVo);
 
     boolean createDevTaskUser(int devTid, Integer uid);
