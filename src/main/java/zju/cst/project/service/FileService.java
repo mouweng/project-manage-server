@@ -18,7 +18,7 @@ public interface FileService {
 
     Integer getTotalDownloadTimes();
 
-    void AddFile(String fileName, String filePath, Integer pid, Integer uid, Long size);
+    void addFile(String fileName, String filePath, Integer pid, Integer uid, Long size, String suffix);
 
     boolean repeatUpload(String fileName, Integer pid);
 

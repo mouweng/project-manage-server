@@ -1,5 +1,6 @@
 package zju.cst.project.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
+import zju.cst.project.common.utils.FileDfsUtil;
 import zju.cst.project.common.utils.ResultTool;
 import zju.cst.project.entity.ProFile;
 import zju.cst.project.entity.ProUser;
@@ -16,6 +18,7 @@ import zju.cst.project.service.FileService;
 import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.UserService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.security.Principal;
@@ -29,6 +32,8 @@ import java.util.List;
 @RestController
 public class FileController {
 
+    @Resource
+    private FileDfsUtil fileDfsUtil ;
     @Autowired
     UserService userService;
     @Autowired
@@ -65,13 +70,25 @@ public class FileController {
 
         for (MultipartFile file : files) {
             String fileName = file.getOriginalFilename();
-            String filePath = path + pid + '/';
 
             // 重复上传
             if (fileService.repeatUpload(fileName, pid)) {
                 return ResultTool.fail(ResultCode.FILE_UPLOAD_REPEAT);
             }
 
+            try {
+                String fileUrl = fileDfsUtil.upload(file) ;
+                if(StringUtils.isEmpty(path)) return ResultTool.fail(ResultCode.FILE_UPLOAD_ERROR);
+                // todo:这里可以加一层编码
+                String filePath = path + fileUrl + "?attname=" + fileNameDecode(fileName);
+                fileService.addFile(fileName, filePath, pid, principalUser.getId(), file.getSize(), fileUrl);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResultTool.fail(ResultCode.FILE_UPLOAD_ERROR);
+            }
+
+            /*
+            // 开始上传文件
             File file1 = new File(System.getProperty("user.dir") + filePath);
             if (!file1.exists()) {
                 file1.mkdirs();
@@ -85,9 +102,17 @@ public class FileController {
                 e.printStackTrace();
                 return ResultTool.fail(ResultCode.FILE_UPLOAD_ERROR);
             }
+            */
         }
         return ResultTool.success("文件上传成功");
     }
+
+    private String fileNameDecode(String fileName) {
+        fileName = fileName.replace(' ', '_');
+        fileName = fileName.replace('#', '_');
+        return fileName;
+    }
+
 
     /**
      * @param id
@@ -97,6 +122,8 @@ public class FileController {
      * @description: 文件下载
      * @date: 2021/3/1 7:30 下午
      */
+    // todo:可以把这个改造成下载次数增加
+    /*
     @GetMapping("/file/download/{pid}/{id}")
     public JsonResult download(HttpServletResponse response, @PathVariable("pid") Integer pid, @PathVariable("id") Integer id, Principal principal) {
 
@@ -148,6 +175,7 @@ public class FileController {
         // return ResultTool.success("文件下载成功");
         return null;
     }
+     */
 
     @GetMapping("/file/delete/{pid}/{id}")
     public JsonResult delete(@PathVariable("pid") Integer pid, @PathVariable("id") Integer id, Principal principal) {
@@ -156,7 +184,7 @@ public class FileController {
         String principalUserName = principal.getName();
         ProUser principalUser = userService.selectByName(principalUserName);
 
-        // 验证是否可以删除文件（验证这个人是否在这个项目中）
+        // 验证是否可以删除文件
         Integer principalUid = principalUser.getId();
         if (!projectService.queryProjectUserByUidPid(principalUid, pid)) {
             return ResultTool.fail(ResultCode.NO_PERMISSION);
@@ -164,15 +192,20 @@ public class FileController {
 
         // 判断文件是否存在
         ProFile proFile = fileService.queryByIdAndPid(id, pid);
-        // 判断文件是否存在
         if (proFile == null) {
             return ResultTool.fail(ResultCode.FILE_NOT_EXIST);
         }
 
+        /*
         // 文件删除
         File file = new File(System.getProperty("user.dir") + proFile.getFilePath() + proFile.getFileName());
         file.delete();
+        */
+        // 文件删除
+        boolean res = fileDfsUtil.deleteFile(proFile.getSuffix());
+        if (!res) return ResultTool.fail(ResultCode.FILE_NOT_EXIST);
 
+        // 数据库中删除文件记录
         fileService.deleteFile(proFile.getId());
         return ResultTool.success("文件删除成功");
     }

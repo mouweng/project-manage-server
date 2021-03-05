@@ -51,7 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             //获取该用户所拥有的权限
             List<ProPermission> sysPermissions = permissionService.selectListByUser(proUser.getId());
             // 声明用户授权
-            System.out.println(sysPermissions);
+            // System.out.println(sysPermissions);
             sysPermissions.forEach(sysPermission -> {
                 GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(sysPermission.getPermissionCode());
                 grantedAuthorities.add(grantedAuthority);
