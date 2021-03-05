@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class BugTaskController {
     // todo: 添加任务
 
-
     // todo: 删除任务
 
     // todo: 将任务添加给用户
+
+    // todo: 根据bugTid查询任务
 
     // todo: 根据devTid查询任务
 
