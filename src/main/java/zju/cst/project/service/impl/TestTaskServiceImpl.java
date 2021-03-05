@@ -42,10 +42,20 @@ public class TestTaskServiceImpl implements TestTaskService {
     }
 
     @Override
-    public boolean createDevTaskUser(int testTid, Integer uid) {
+    public boolean createTestTaskUser(int testTid, Integer uid) {
         ProTestTaskUser proTestTaskUser = new ProTestTaskUser();
         proTestTaskUser.setTestTid(testTid);
         proTestTaskUser.setUid(uid);
         return testTaskUserDao.insert(proTestTaskUser) > 0 ? true : false;
+    }
+
+    @Override
+    public boolean deleteTestTask(Integer testTid) {
+        return testTaskDao.deleteById(testTid) > 0 ? true : false;
+    }
+
+    @Override
+    public boolean deleteTestTaskUser(Integer testTid) {
+        return testTaskUserDao.deleteByTestTid(testTid) > 0 ? true : false;
     }
 }

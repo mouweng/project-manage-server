@@ -11,6 +11,9 @@ public interface TestTaskService {
 
     int createTestTask(CreateTestTaskVo createTestTaskVo);
 
-    boolean createDevTaskUser(int devTid, Integer uid);
+    boolean createTestTaskUser(int devTid, Integer uid);
 
+    boolean deleteTestTask(Integer testTid);
+
+    boolean deleteTestTaskUser(Integer testTid);
 }

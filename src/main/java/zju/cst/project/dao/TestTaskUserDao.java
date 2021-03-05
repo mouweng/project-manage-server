@@ -11,4 +11,6 @@ import zju.cst.project.entity.ProTestTaskUser;
 @Mapper
 public interface TestTaskUserDao {
     int insert(ProTestTaskUser proTestTaskUser);
+
+    int deleteByTestTid(Integer testTid);
 }

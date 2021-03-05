@@ -12,4 +12,6 @@ import zju.cst.project.entity.ProTestTask;
 public interface TestTaskDao {
 
     int insert(ProTestTask proTestTask);
+
+    int deleteById(Integer testTid);
 }

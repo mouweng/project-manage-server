@@ -23,4 +23,8 @@
         VALUES (#{devTid}, #{projectId}, #{testCase}, #{testResults}, #{status}, #{finished}, #{estimatedStartTime}, #{estimatedEndTime}, #{actualStartTime}, #{actualEndTime}, #{gmtCreate}, #{gmtUpdate})
     </insert>
 
+    <delete id="deleteById">
+        delete from pro_test_task where id = #{id}
+    </delete>
+
 </mapper>

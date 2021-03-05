@@ -3,7 +3,7 @@
 <mapper namespace="zju.cst.project.dao.TestTaskUserDao">
     <resultMap type="zju.cst.project.entity.ProTestTaskUser" id="TestTaskUserMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="TestTid" column="test_tid" jdbcType="INTEGER"/>
+        <result property="testTid" column="test_tid" jdbcType="INTEGER"/>
         <result property="uid" column="uid" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -14,4 +14,7 @@
         VALUES (#{testTid},#{uid})
     </insert>
 
+    <delete id="deleteByTestTid">
+        delete from pro_test_task_user where test_tid = #{testTid}
+    </delete>
 </mapper>
