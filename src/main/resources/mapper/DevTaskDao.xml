@@ -23,6 +23,22 @@
             COUNT(*)
         FROM pro_dev_task
     </select>
+    
+    <select id="getTaskCreatedInAWeek" resultMap="DevTaskMap">
+        SELECT
+            *
+        FROM pro_dev_task
+        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> DATE(gmt_create)
+        ORDER BY gmt_create DESC
+    </select>
+
+    <select id="getTaskFinishedInAWeek" resultMap="DevTaskMap">
+        SELECT
+            *
+        FROM pro_dev_task
+        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> DATE(actual_end_time)
+        ORDER BY actual_end_time DESC
+    </select>
 
     <select id="queryById" resultMap="DevTaskMap">
         SELECT

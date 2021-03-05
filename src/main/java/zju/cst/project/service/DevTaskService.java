@@ -14,6 +14,10 @@ public interface DevTaskService {
 
     int getDevTaskNum();
 
+    List<ProDevTask> getTaskFinishedInAWeek();
+
+    List<ProDevTask> getTaskCreatedInAWeek();
+
     int createDevTask(CreateDevTaskVo createDevTaskVo);
 
     boolean createDevTaskUser(int devTid, Integer uid);

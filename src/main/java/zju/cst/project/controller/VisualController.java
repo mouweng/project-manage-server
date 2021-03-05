@@ -77,7 +77,14 @@ public class VisualController {
     }
 
     // todo: 统计近7天任务创建情况
-
+    @GetMapping("/visual/getTaskCreatedInAWeek")
+    public JsonResult getTaskCreatedInAWeek(){
+        return ResultTool.success(devTaskService.getTaskCreatedInAWeek());
+    }
 
     // todo: 统计近7天任务完成情况
+    @GetMapping("/visual/getTaskFinishedInAWeek")
+    public JsonResult getTaskFinishedInAWeek(){
+        return ResultTool.success(devTaskService.getTaskFinishedInAWeek());
+    }
 }

@@ -31,6 +31,16 @@ public class DevTaskServiceImpl implements DevTaskService {
     }
 
     @Override
+    public List<ProDevTask> getTaskCreatedInAWeek(){
+        return devTaskDao.getTaskCreatedInAWeek();
+    }
+
+    @Override
+    public List<ProDevTask> getTaskFinishedInAWeek(){
+        return devTaskDao.getTaskFinishedInAWeek();
+    }
+
+    @Override
     public int createDevTask(CreateDevTaskVo createDevTaskVo) {
         ProDevTask proDevTask = new ProDevTask();
         proDevTask.setContent(createDevTaskVo.getContent());
