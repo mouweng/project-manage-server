@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import zju.cst.project.entity.ProFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wengyifan
@@ -12,6 +13,33 @@ import java.util.List;
  */
 @Mapper
 public interface FileDao {
+    /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description: 获得文件数量
+     * @date 2021/3/4 1:25 下午
+     */
+    int getFileNum();
+
+    /**
+     * @return java.util.List<zju.cst.project.entity.ProFile>
+     * @throws
+     * @author xushifeng
+     * @description: 获得所有的文件信息
+     * @date 2021/3/4 3:22 下午
+     */
+    List<ProFile> getAllFiles();
+
+    /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description
+     * @date 2021/3/4 6:45 下午
+     */
+    Integer getTotalDownloadTimes();
+
     /**
      * @param pid
      * @return {@link List< ProFile>}

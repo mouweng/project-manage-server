@@ -74,4 +74,14 @@ public interface ProjectDao {
      * @date: 2021/2/28 9:50 上午
      */
     List<ProProject> queryProjectByUidAndType(Integer uid, Integer type);
+
+    /**
+     *
+     * @return {@link int}
+     * @throws
+     * @author: xushifeng
+     * @description: 查询项目数量
+     * @date: 2021/3/3 8:14 下午
+     */
+    int getProjectNum();
 }

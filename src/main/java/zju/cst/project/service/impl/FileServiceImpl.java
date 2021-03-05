@@ -8,6 +8,7 @@ import zju.cst.project.service.FileService;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wengyifan
@@ -18,6 +19,21 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
     @Resource
     FileDao fileDao;
+
+    @Override
+    public int getFileNum() {
+        return fileDao.getFileNum();
+    }
+
+    @Override
+    public List<ProFile> getAllFiles(){
+        return fileDao.getAllFiles();
+    }
+
+    @Override
+    public Integer getTotalDownloadTimes(){
+        return fileDao.getTotalDownloadTimes();
+    }
 
     @Override
     public void addFile(String fileName, String filePath, Integer pid, Integer uid, Long size, String suffix) {

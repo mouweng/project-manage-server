@@ -15,6 +15,24 @@
         <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="getFileNum" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM pro_file
+    </select>
+
+    <select id="getAllFiles" resultMap="FileMap">
+        SELECT
+            *
+        FROM pro_file
+    </select>
+
+    <select id="getTotalDownloadTimes" resultType="java.lang.Integer">
+        SELECT
+            SUM(download_times)
+        FROM pro_file
+    </select>
+
     <select id="queryByPid" resultMap="FileMap">
         SELECT
             *

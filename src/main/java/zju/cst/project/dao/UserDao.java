@@ -14,6 +14,15 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description: 获得用户总数
+     * @date 2021/3/4 2:14 下午
+     */
+    int getUserNum();
+
+    /**
      * @param id
      * @return {@link ProUser}
      * @throws

@@ -33,6 +33,18 @@ public class UserServiceImpl implements UserService {
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description: 获得用户总数
+     * @date 2021/3/4 2:17 下午
+     */
+    @Override
+    public int getUserNum(){
+        return this.userDao.getUserNum();
+    }
+
+    /**
      * @param id
      * @return {@link ProUser}
      * @throws

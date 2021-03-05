@@ -10,6 +10,9 @@
         <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="getProjectNum" resultType="int">
+        SELECT COUNT(*) FROM pro_project
+    </select>
 
     <select id="queryAll" resultMap="ProjectMap">
         SELECT

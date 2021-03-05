@@ -13,6 +13,16 @@ import java.util.Map;
  */
 public interface ProjectService {
     /**
+     *
+     * @return int
+     * @throws
+     * @author xushifeng
+     * @description
+     * @date 2021/3/3 8:48 下午
+     */
+    int getProjectNum();
+
+    /**
      * @param
      * @return {@link ProProject}
      * @throws
@@ -112,4 +122,5 @@ public interface ProjectService {
     void deleteProject(Integer id);
 
     List<ProProject> queryByUidAll(Integer id);
+
 }
