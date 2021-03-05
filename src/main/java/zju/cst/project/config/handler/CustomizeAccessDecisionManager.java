@@ -27,7 +27,7 @@ public class CustomizeAccessDecisionManager implements AccessDecisionManager {
             String needRole = ca.getAttribute();
             //当前用户所具有的权限
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            System.out.println(authorities);
+            // System.out.println(authorities);
             for (GrantedAuthority authority : authorities) {
                 if (authority.getAuthority().equals(needRole)) {
                     return;
