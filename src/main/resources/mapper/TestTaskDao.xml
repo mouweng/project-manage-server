@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.TestTaskDao">
+
+    <resultMap type="zju.cst.project.entity.ProTestTask" id="TestTaskMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="devTid" column="dev_tid" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="testCase" column="test_case" jdbcType="VARCHAR"/>
+        <result property="testResults" column="test_results" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="finished" column="finished" jdbcType="INTEGER"/>
+        <result property="estimatedStartTime" column="estimated_start_time" jdbcType="TIMESTAMP"/>
+        <result property="estimatedEndTime" column="estimated_end_time" jdbcType="TIMESTAMP"/>
+        <result property="actualStartTime" column="actual_start_time" jdbcType="TIMESTAMP"/>
+        <result property="actualEndTime" column="actual_end_time" jdbcType="TIMESTAMP"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+        <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO pro_test_task(dev_tid, project_id, test_case, test_results, status, finished, estimated_start_time, estimated_end_time, actual_start_time, actual_end_time, gmt_create, gmt_update)
+        VALUES (#{devTid}, #{projectId}, #{testCase}, #{testResults}, #{status}, #{finished}, #{estimatedStartTime}, #{estimatedEndTime}, #{actualStartTime}, #{actualEndTime}, #{gmtCreate}, #{gmtUpdate})
+    </insert>
+
+</mapper>

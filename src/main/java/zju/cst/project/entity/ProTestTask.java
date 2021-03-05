@@ -21,7 +21,7 @@ public class ProTestTask implements Serializable {
     // 自增id
     private Integer id;
     // 开发任务id（外键）
-    private String devTid;
+    private Integer devTid;
     // 任务所属项目
     private Integer projectId;
     // 测试案例
