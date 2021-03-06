@@ -14,4 +14,6 @@ public interface TestTaskDao {
     int insert(ProTestTask proTestTask);
 
     int deleteById(Integer testTid);
+
+    int update(ProTestTask proTestTask);
 }

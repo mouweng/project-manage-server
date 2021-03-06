@@ -64,7 +64,17 @@ public class TestTaskController {
     // todo: 根据pid和完成情况查询任务
 
     // todo: 更改任务信息
-
+    @PostMapping("/testTask/updateTestTask")
+    public JsonResult updateTestDevTask(CreateTestTaskVo createTestTaskVo) {
+        boolean res = testTaskService.updateTestTask(createTestTaskVo);
+        if(res) return ResultTool.success("任务修改成功");
+        else return ResultTool.fail(ResultCode.COMMON_FAIL);
+    }
     // todo: 更改任务状态（待处理/进行中/已完成）
-
+    @GetMapping("/testTask/updateTestTaskStatus/{testTid}/{status}")
+    public JsonResult updateTestTaskStatus(@PathVariable("testTid") Integer testTid, @PathVariable("status") Integer status) {
+        boolean res = testTaskService.updateTestTaskStatus(testTid, status);
+        if(res) return ResultTool.success("状态修改成功");
+        else return ResultTool.fail(ResultCode.COMMON_FAIL);
+    }
 }

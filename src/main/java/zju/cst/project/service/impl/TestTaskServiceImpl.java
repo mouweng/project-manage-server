@@ -58,4 +58,25 @@ public class TestTaskServiceImpl implements TestTaskService {
     public boolean deleteTestTaskUser(Integer testTid) {
         return testTaskUserDao.deleteByTestTid(testTid) > 0 ? true : false;
     }
+
+
+    @Override
+    public boolean updateTestTask(CreateTestTaskVo createTestTaskVo) {
+        ProTestTask proTestTask = new ProTestTask();
+        proTestTask.setId(createTestTaskVo.getTestTid());
+        proTestTask.setTestCase(createTestTaskVo.getTestCase());
+        proTestTask.setTestResults(createTestTaskVo.getTestResults());
+        proTestTask.setGmtUpdate(new Date());
+        return testTaskDao.update(proTestTask) > 0 ? true : false;
+    }
+
+    @Override
+    public boolean updateTestTaskStatus(Integer testTid, Integer status) {
+        ProTestTask proTestTask = new ProTestTask();
+        if (status <= 3 && status >= 1) proTestTask.setStatus(status);
+        else return false;
+        proTestTask.setId(testTid);
+        proTestTask.setGmtUpdate(new Date());
+        return testTaskDao.update(proTestTask) > 0 ? true : false;
+    }
 }
