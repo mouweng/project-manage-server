@@ -121,6 +121,7 @@ public class UserServiceImpl implements UserService {
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
+        user.setPhotoFile("mouweng.website:8888/group1/M00/00/00/rBW7KmBDf2iAF9TPAABQvsLNIEs480.jpg");
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         user.setCreateUser(createUser.getId());

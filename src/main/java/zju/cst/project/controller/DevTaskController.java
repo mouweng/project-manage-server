@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.entity.ProDevTask;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.DevTaskService;
 
@@ -25,7 +26,8 @@ public class DevTaskController {
     public JsonResult createDevTask(CreateDevTaskVo createDevTaskVo) {
         int devTid = devTaskService.createDevTask(createDevTaskVo);
         devTaskService.createDevTaskUser(devTid, createDevTaskVo.getUid());
-        return ResultTool.success("任务添加成功");
+        ProDevTask proDevTask = devTaskService.queryDevTaskByDevTid(devTid);
+        return ResultTool.success(proDevTask);
     }
 
 

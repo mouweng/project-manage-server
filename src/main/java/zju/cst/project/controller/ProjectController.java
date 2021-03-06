@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.entity.ProProject;
 import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.ProjectVo;
 import zju.cst.project.service.ProjectService;
@@ -167,7 +168,7 @@ public class ProjectController {
      * @date: 2021/3/1 1:18 下午
      */
     @GetMapping("/project/deleteUser/{pid}/{uid}")
-    public JsonResult AddUser(@PathVariable("pid") Integer pid, @PathVariable("uid") Integer uid, Principal principal) {
+    public JsonResult deleteUser(@PathVariable("pid") Integer pid, @PathVariable("uid") Integer uid, Principal principal) {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         // 获取当前登录用户
         String principalUserName = principal.getName();
@@ -203,10 +204,11 @@ public class ProjectController {
 
         // 创建项目
         int pid = projectService.createProject(projectVo);
+        ProProject proProject = projectService.queryById(pid);
 
         // 关联项目和管理员
         projectService.addManagerUser(pid, principalUser.getId());
-        return ResultTool.success("创建项目成功");
+        return ResultTool.success(proProject);
     }
 
     // todo:设置测试组长
