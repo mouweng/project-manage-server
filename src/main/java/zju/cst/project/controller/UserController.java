@@ -174,7 +174,8 @@ public class UserController {
      * @author: Huachang Yu
      */
     @GetMapping( value = "/user/all")
-    public List<ProUser> getAllUser(Principal principal) {
-        return this.userService.getAllUsers();
+    public JsonResult<List<ProUser>> getAllUser(Principal principal) {
+        if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
+        return ResultTool.success(this.userService.getAllUsers());
     }
 }
