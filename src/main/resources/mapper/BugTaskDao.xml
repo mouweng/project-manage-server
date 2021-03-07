@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.BugTaskDao">
+
+    <resultMap type="zju.cst.project.entity.ProBugTask" id="BugTaskMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="devTid" column="dev_tid" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="finished" column="finished" jdbcType="INTEGER"/>
+        <result property="estimatedStartTime" column="estimated_start_time" jdbcType="TIMESTAMP"/>
+        <result property="estimatedEndTime" column="estimated_end_time" jdbcType="TIMESTAMP"/>
+        <result property="actualStartTime" column="actual_start_time" jdbcType="TIMESTAMP"/>
+        <result property="actualEndTime" column="actual_end_time" jdbcType="TIMESTAMP"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+        <result property="gmtUpdate" column="gmt_update" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getBugTaskNum" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM pro_bug_task
+    </select>
+
+    <select id="getTaskCreatedInAWeek" resultMap="BugTaskMap">
+        SELECT
+            *
+        FROM pro_bug_task
+        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> DATE(gmt_create)
+        ORDER BY gmt_create DESC
+    </select>
+
+    <select id="getTaskFinishedInAWeek" resultMap="BugTaskMap">
+        SELECT
+            *
+        FROM pro_bug_task
+        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> DATE(actual_end_time)
+        ORDER BY actual_end_time DESC
+    </select>
+
+    <select id="queryById" resultMap="BugTaskMap">
+        SELECT
+            *
+        FROM pro_bug_task
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByDevTid" resultType="BugTaskMap">
+        SELECT
+               *
+        FROM pro_bug_task
+        WHERE dev_tid = #{devTid}
+    </select>
+
+    <select id="queryByPid" resultMap="BugTaskMap">
+        SELECT
+            *
+        FROM pro_bug_task
+        WHERE project_id = #{pid}
+    </select>
+
+    <!--多表查询-->
+    <select id="queryByDevUid" resultMap="BugTaskMap">
+        SELECT
+            dt.*
+        FROM
+            pro_user AS u
+                LEFT JOIN pro_bug_task_user AS btu
+                          ON u.id = btu.dev_uid
+                LEFT JOIN pro_bug_task AS dt
+                          ON btu.bug_tid = dt.id
+        WHERE u.id = #{devUid}
+    </select>
+
+    <select id="queryByTestUid" resultMap="BugTaskMap">
+        SELECT
+            dt.*
+        FROM
+            pro_user AS u
+                LEFT JOIN pro_bug_task_user AS btu
+                          ON u.id = btu.test_uid
+                LEFT JOIN pro_bug_task AS dt
+                          ON btu.bug_tid = dt.id
+        WHERE u.id = #{testUid}
+    </select>
+
+    <select id="queryBugTaskByPidAndStatus" resultMap="BugTaskMap">
+        SELECT
+            *
+        FROM pro_bug_task
+        WHERE project_id = #{pid} AND status = #{status}
+    </select>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into pro_bug_task(dev_tid, project_id, content, status, finished, estimated_start_time, estimated_end_time, actual_start_time, actual_end_time, gmt_create, gmt_update)
+        values (#{devTid}, #{projectId}, #{content}, #{status}, #{finished}, #{estimatedStartTime}, #{estimatedEndTime}, #{actualStartTime}, #{actualEndTime}, #{gmtCreate}, #{gmtUpdate})
+    </insert>
+
+    <delete id="deleteById">
+        delete from pro_bug_task where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.BugTaskUserDao">
+
+    <resultMap type="zju.cst.project.entity.ProBugTaskUser" id="BugTaskUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="bugTid" column="bug_tid" jdbcType="INTEGER"/>
+        <result property="devUid" column="dev_uid" jdbcType="INTEGER"/>
+        <result property="testUid" column="test_uid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryById" resultMap="BugTaskUserMap">
+        SELECT
+            *
+        FROM pro_bug_task_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryByBugTidAndUid" resultMap="BugTaskUserMap">
+        SELECT
+            *
+        FROM pro_bug_task_user
+        WHERE bug_tid = #{tid} AND dev_uid = #{DevUid} And test_uid = #{TestUid}
+    </select>
+
+    <update id="update">
+        UPDATE pro_bug_task_user
+        <set>
+            <if test="BugTid != null">
+                Bug_tid = #{bugTid},
+            </if>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO
+            pro_bug_task_user(bug_tid, dev_uid, test_uid)
+        VALUES(#{bugTid}, #{devUid}, #{testUid})
+    </insert>
+
+    <delete id="deleteById">
+        delete from pro_bug_task_user where id = #{id}
+    </delete>
+
+    <delete id="deleteByBugTid">
+        delete from pro_bug_task_user where bug_tid = #{bugTid}
+    </delete>
+</mapper>
