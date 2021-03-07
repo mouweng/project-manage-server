@@ -20,7 +20,9 @@ public interface BugTaskDao {
 
     List<ProBugTask> queryByPid(Integer pid);
 
-    List<ProBugTask> queryByUid(Integer uid);
+    List<ProBugTask> queryByDevUid(Integer devUid);
+
+    List<ProBugTask> queryByTestUid(Integer testUid);
 
     int update(ProBugTask proBugTask);
 

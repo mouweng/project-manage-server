@@ -46,7 +46,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="queryByDevTid" resultType="BugTaskMap">
+    <select id="queryByDevTid" resultMap="BugTaskMap">
         SELECT
                *
         FROM pro_bug_task
@@ -100,5 +100,45 @@
     <delete id="deleteById">
         delete from pro_bug_task where id = #{id}
     </delete>
+
+    <update id="update">
+        update pro_bug_task
+        <set>
+            <if test="devTid != null">
+                dev_tid = #{devTid},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="finished != null">
+                finished = #{finished},
+            </if>
+            <if test="estimatedStartTime != null">
+                estimated_start_time = #{estimatedStartTime},
+            </if>
+            <if test="estimatedEndTime != null">
+                estimated_end_time = #{estimatedEndTime},
+            </if>
+            <if test="actualStartTime != null">
+                actual_start_time = #{actualStartTime},
+            </if>
+            <if test="actualEndTime != null">
+                actual_end_time = #{actualEndTime},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate},
+            </if>
+            <if test="gmtUpdate != null">
+                gmt_update = #{gmtUpdate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>

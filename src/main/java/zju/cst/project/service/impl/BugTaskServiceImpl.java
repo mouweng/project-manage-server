@@ -5,8 +5,6 @@ import zju.cst.project.dao.BugTaskDao;
 import zju.cst.project.dao.BugTaskUserDao;
 import zju.cst.project.entity.ProBugTask;
 import zju.cst.project.entity.ProBugTaskUser;
-import zju.cst.project.entity.ProDevTask;
-import zju.cst.project.entity.ProDevTaskUser;
 import zju.cst.project.entity.vo.CreateBugTaskVo;
 import zju.cst.project.service.BugTaskService;
 
@@ -15,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class BugTaskServicelmpl implements BugTaskService {
+public class BugTaskServiceImpl implements BugTaskService {
     @Resource
     BugTaskDao bugTaskDao;
     @Resource
@@ -75,5 +73,45 @@ public class BugTaskServicelmpl implements BugTaskService {
     @Override
     public List<ProBugTask> queryBugTaskByDevTid(Integer devTid){
         return bugTaskDao.queryByDevTid(devTid);
+    }
+
+    @Override
+    public List<ProBugTask> queryBugTaskByPid(Integer pid){
+        return bugTaskDao.queryByPid(pid);
+    }
+
+    @Override
+    public List<ProBugTask> queryBugTaskByDevUid(Integer devUid){
+        return bugTaskDao.queryByDevUid(devUid);
+    }
+
+    @Override
+    public List<ProBugTask> queryBugTaskByTestUid(Integer testUid){
+        return bugTaskDao.queryByTestUid(testUid);
+    }
+
+    @Override
+    public List<ProBugTask> queryBugTaskByPidAndStatus(Integer pid, Integer status){
+        return bugTaskDao.queryBugTaskByPidAndStatus(pid, status);
+    }
+
+    @Override
+    public boolean updateBugTask(CreateBugTaskVo createBugTaskVo){
+        ProBugTask proBugTask = new ProBugTask();
+        proBugTask.setId(createBugTaskVo.getBugTid());
+        proBugTask.setDevTid(createBugTaskVo.getDevTid());
+        proBugTask.setContent(createBugTaskVo.getContent());
+        proBugTask.setGmtUpdate(new Date());
+        return bugTaskDao.update(proBugTask) > 0;
+    }
+
+    @Override
+    public boolean updateBugTaskStatus(Integer bugTid, Integer status){
+        ProBugTask proBugTask = new ProBugTask();
+        proBugTask.setId(bugTid);
+        if (status <= 3 && status >= 1) proBugTask.setStatus(status);
+        else return false;
+        proBugTask.setGmtUpdate(new Date());
+        return bugTaskDao.update(proBugTask) > 0;
     }
 }

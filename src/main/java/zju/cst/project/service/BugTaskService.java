@@ -14,25 +14,27 @@ public interface BugTaskService {
 
     int createBugTask(CreateBugTaskVo createBugTaskVo);
 
-    boolean createBugTaskUser(int bugTid, Integer devUid, Integer testUid);
+    boolean createBugTaskUser(int DevTid, Integer devUid, Integer testUid);
 
     boolean deleteBugTask(Integer bugTid);
 
     boolean deleteBugTaskUser(Integer bugTid);
 
-    ProBugTask queryBugTaskByBugTid(Integer BugTid);
+    ProBugTask queryBugTaskByBugTid(Integer bugTid);
 
-    List<ProBugTask> queryBugTaskByDevTid(Integer DevTid);
+    List<ProBugTask> queryBugTaskByDevTid(Integer devTid);
 
-//    List<ProBugTask> queryBugTaskByUid(Integer uid);
+    List<ProBugTask> queryBugTaskByDevUid(Integer devUid);
 
-//    List<ProBugTask> queryBugTaskByPid(Integer pid);
-//
-//    boolean updateBugTaskStatus(Integer BugTid, Integer status);
-//
+    List<ProBugTask> queryBugTaskByTestUid(Integer devUid);
+
+    List<ProBugTask> queryBugTaskByPid(Integer pid);
+
+    boolean updateBugTaskStatus(Integer bugTid, Integer status);
+
 //    List<ProBugTask> queryBugTaskByUidAndStatus(Integer uid, Integer status);
-//
-//    List<ProBugTask> queryBugTaskByPidAndStatus(Integer pid, Integer status);
-//
-//    boolean updateBugTask(CreateBugTaskVo createBugTaskVo);
+
+    List<ProBugTask> queryBugTaskByPidAndStatus(Integer pid, Integer status);
+
+    boolean updateBugTask(CreateBugTaskVo createBugTaskVo);
 }
