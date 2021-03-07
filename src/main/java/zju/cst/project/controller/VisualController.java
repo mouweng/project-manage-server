@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.utils.ResultTool;
-import zju.cst.project.service.DevTaskService;
-import zju.cst.project.service.FileService;
-import zju.cst.project.service.ProjectService;
-import zju.cst.project.service.UserService;
+import zju.cst.project.service.*;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -30,6 +27,8 @@ public class VisualController {
     UserService userService;
     @Autowired
     DevTaskService devTaskService;
+    @Autowired
+    BugTaskService bugTaskService;
     // todo: 统计项目个数
     /**
      * @return int
@@ -54,7 +53,7 @@ public class VisualController {
     public JsonResult getTaskNum(){
         int devTaskNum = devTaskService.getDevTaskNum();
         int testTaskNum = 0;
-        int bugTaskNum = 0;
+        int bugTaskNum = bugTaskService.getBugTaskNum();
         int totalTaskNum = devTaskNum + testTaskNum + bugTaskNum;
         Map map = new HashMap();
         map.put("devTaskNum", devTaskNum);
@@ -79,12 +78,18 @@ public class VisualController {
     // todo: 统计近7天任务创建情况
     @GetMapping("/visual/getTaskCreatedInAWeek")
     public JsonResult getTaskCreatedInAWeek(){
-        return ResultTool.success(devTaskService.getTaskCreatedInAWeek());
+        Map map = new HashMap();
+        map.put("devTask", devTaskService.getTaskCreatedInAWeek());
+        map.put("bugTask", bugTaskService.getTaskCreatedInAWeek());
+        return ResultTool.success(map);
     }
 
     // todo: 统计近7天任务完成情况
     @GetMapping("/visual/getTaskFinishedInAWeek")
     public JsonResult getTaskFinishedInAWeek(){
-        return ResultTool.success(devTaskService.getTaskFinishedInAWeek());
+        Map map = new HashMap();
+        map.put("devTask", devTaskService.getTaskFinishedInAWeek());
+        map.put("bugTask", bugTaskService.getTaskFinishedInAWeek());
+        return ResultTool.success(map);
     }
 }

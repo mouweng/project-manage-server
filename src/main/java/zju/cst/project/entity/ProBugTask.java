@@ -21,7 +21,7 @@ public class ProBugTask implements Serializable {
     // 自增id
     private Integer id;
     // 开发任务id
-    private String devTid;
+    private Integer devTid;
     // 任务所属项目
     private Integer projectId;
     // 缺陷内容
