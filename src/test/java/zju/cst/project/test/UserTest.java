@@ -16,6 +16,9 @@ import java.util.List;
 @SpringBootTest
 public class UserTest {
 
+    /*
+     HI THIS IS NB
+     */
     @Resource
     private UserDao userDao;
 
