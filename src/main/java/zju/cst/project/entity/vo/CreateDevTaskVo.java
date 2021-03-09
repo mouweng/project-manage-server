@@ -26,4 +26,6 @@ public class CreateDevTaskVo implements Serializable {
     private String content;
     // 任务名字
     private String name;
+    // 状态
+    private Integer status;
 }

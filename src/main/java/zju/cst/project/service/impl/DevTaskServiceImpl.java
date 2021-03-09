@@ -46,7 +46,9 @@ public class DevTaskServiceImpl implements DevTaskService {
         proDevTask.setContent(createDevTaskVo.getContent());
         proDevTask.setName(createDevTaskVo.getName());
         proDevTask.setProjectId(createDevTaskVo.getPid());
-        proDevTask.setStatus(1);
+        if (createDevTaskVo.getStatus() == null || createDevTaskVo.getStatus() <= 0 || createDevTaskVo.getStatus() > 3)
+            proDevTask.setStatus(1);
+        else proDevTask.setStatus(createDevTaskVo.getStatus());
         proDevTask.setFinished(0);// 暂时无用
         proDevTask.setTestPass(0);// 暂时无用
         proDevTask.setGmtCreate(new Date());
