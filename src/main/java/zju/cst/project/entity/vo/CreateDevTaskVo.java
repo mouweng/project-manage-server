@@ -24,6 +24,6 @@ public class CreateDevTaskVo implements Serializable {
     private Integer pid;
     // 任务内容
     private String content;
-    // 自测内容
-    private String selfTest;
+    // 任务名字
+    private String name;
 }

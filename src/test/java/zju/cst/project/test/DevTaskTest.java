@@ -43,7 +43,7 @@ public class DevTaskTest {
     public void test3() {
         ProDevTask proDevTask = devTaskDao.queryById(4);
         proDevTask.setContent("文档任务1");
-        proDevTask.setSelfTest("doc");
+        proDevTask.setName("doc");
         proDevTask.setStatus(1);
         proDevTask.setFinished(1);
         proDevTask.setTestPass(1);

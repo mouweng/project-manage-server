@@ -23,8 +23,8 @@ public class ProDevTask implements Serializable {
     private Integer projectId;
     // 任务内容
     private String content;
-    // 自测内容
-    private String selfTest;
+    // 任务名字
+    private String name;
     // 任务状态(待处理/进行中/已完成)
     private Integer status;
     // 是否完成(1代表是/0代表否)

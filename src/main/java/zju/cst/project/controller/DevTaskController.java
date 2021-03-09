@@ -21,7 +21,7 @@ public class DevTaskController {
     DevTaskService devTaskService;
 
     // 添加任务
-    // 传递参数：uid（用户id）, pid（项目id）, content（任务内容）, selfTest（自测内容）
+    // 传递参数：uid（用户id）, pid（项目id）, content（任务内容）, name（任务名字）
     @PostMapping("/devTask/createDevTask")
     public JsonResult createDevTask(CreateDevTaskVo createDevTaskVo) {
         int devTid = devTaskService.createDevTask(createDevTaskVo);
@@ -87,7 +87,7 @@ public class DevTaskController {
     }
 
     // 更改任务信息
-    // 传递参数：devTid（任务id）, content（任务内容）, selfTest（自测内容）
+    // 传递参数：devTid（任务id）, content（任务内容）, name（任务名字）
     @PostMapping("/devTask/updateDevTask")
     public JsonResult updateDevTask(CreateDevTaskVo createDevTaskVo) {
         boolean res = devTaskService.updateDevTask(createDevTaskVo);

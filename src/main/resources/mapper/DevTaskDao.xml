@@ -6,7 +6,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="projectId" column="project_id" jdbcType="INTEGER"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="selfTest" column="self_test" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
         <result property="finished" column="finished" jdbcType="INTEGER"/>
         <result property="testPass" column="test_pass" jdbcType="INTEGER"/>
@@ -97,8 +97,8 @@
             <if test="content != null and content != ''">
                 content = #{content},
             </if>
-            <if test="selfTest != null and selfTest != ''">
-                self_test = #{selfTest},
+            <if test="name != null and name != ''">
+                name = #{name},
             </if>
             <if test="status != null">
                 status = #{status},
@@ -133,8 +133,8 @@
 
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into pro_dev_task(project_id, content, self_test, status, finished, test_pass, estimated_start_time, estimated_end_time, actual_start_time, actual_end_time, gmt_create, gmt_update)
-        values (#{projectId}, #{content}, #{selfTest}, #{status}, #{finished}, #{testPass}, #{estimatedStartTime}, #{estimatedEndTime}, #{actualStartTime}, #{actualEndTime}, #{gmtCreate}, #{gmtUpdate})
+        insert into pro_dev_task(project_id, content, name, status, finished, test_pass, estimated_start_time, estimated_end_time, actual_start_time, actual_end_time, gmt_create, gmt_update)
+        values (#{projectId}, #{content}, #{name}, #{status}, #{finished}, #{testPass}, #{estimatedStartTime}, #{estimatedEndTime}, #{actualStartTime}, #{actualEndTime}, #{gmtCreate}, #{gmtUpdate})
     </insert>
 
 

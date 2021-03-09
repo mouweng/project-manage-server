@@ -44,7 +44,7 @@ public class DevTaskServiceImpl implements DevTaskService {
     public int createDevTask(CreateDevTaskVo createDevTaskVo) {
         ProDevTask proDevTask = new ProDevTask();
         proDevTask.setContent(createDevTaskVo.getContent());
-        proDevTask.setSelfTest(createDevTaskVo.getSelfTest());
+        proDevTask.setName(createDevTaskVo.getName());
         proDevTask.setProjectId(createDevTaskVo.getPid());
         proDevTask.setStatus(1);
         proDevTask.setFinished(0);// 暂时无用
@@ -113,7 +113,7 @@ public class DevTaskServiceImpl implements DevTaskService {
         ProDevTask proDevTask = new ProDevTask();
         proDevTask.setId(createDevTaskVo.getDevTid());
         proDevTask.setContent(createDevTaskVo.getContent());
-        proDevTask.setSelfTest(createDevTaskVo.getSelfTest());
+        proDevTask.setName(createDevTaskVo.getName());
         proDevTask.setGmtUpdate(new Date());
         return devTaskDao.update(proDevTask) > 0 ? true : false;
     }
