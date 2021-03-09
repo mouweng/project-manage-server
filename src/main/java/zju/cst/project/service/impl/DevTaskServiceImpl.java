@@ -101,6 +101,18 @@ public class DevTaskServiceImpl implements DevTaskService {
     }
 
     @Override
+    public boolean updateDevTaskFinished(Integer devTid, Integer finished) {
+        ProDevTask proDevTask = new ProDevTask();
+        proDevTask.setId(devTid);
+        if (finished == 1 || finished == 2)
+            proDevTask.setFinished(finished);
+        else return false;
+        proDevTask.setGmtUpdate(new Date());
+        return devTaskDao.update(proDevTask) > 0 ? true : false;
+    }
+
+
+    @Override
     public List<ProDevTask> queryDevTaskByUidAndStatus(Integer uid, Integer status) {
         return devTaskDao.queryDevTaskByUidAndStatus(uid, status);
     }
@@ -119,4 +131,5 @@ public class DevTaskServiceImpl implements DevTaskService {
         proDevTask.setGmtUpdate(new Date());
         return devTaskDao.update(proDevTask) > 0 ? true : false;
     }
+
 }

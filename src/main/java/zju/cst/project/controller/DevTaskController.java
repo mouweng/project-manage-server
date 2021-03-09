@@ -105,4 +105,11 @@ public class DevTaskController {
         else return ResultTool.fail(ResultCode.COMMON_FAIL);
     }
 
+    @GetMapping("/devTask/updateDevTaskFinished/{devTid}/{finished}")
+    public JsonResult updateDevTaskFinished(@PathVariable("devTid") Integer devTid, @PathVariable("finished") Integer finished) {
+        boolean res = devTaskService.updateDevTaskFinished(devTid, finished);
+        if(res) return ResultTool.success("状态修改成功");
+        else return ResultTool.fail(ResultCode.COMMON_FAIL);
+    }
+
 }
