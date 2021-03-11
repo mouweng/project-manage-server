@@ -56,7 +56,7 @@ public class FileController {
      * @date: 2021/3/1 7:30 下午
      */
     @PostMapping("/file/upload/{pid}")
-    public JsonResult upload(@RequestParam("files") MultipartFile files[], @PathVariable("pid") Integer pid, Principal principal) {
+    public JsonResult upload(@RequestParam("file") MultipartFile files[], @PathVariable("pid") Integer pid, Principal principal) {
 
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         // 获取当前登录用户
