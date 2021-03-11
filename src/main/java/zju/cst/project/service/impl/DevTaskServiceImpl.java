@@ -104,7 +104,7 @@ public class DevTaskServiceImpl implements DevTaskService {
     public boolean updateDevTaskFinished(Integer devTid, Integer finished) {
         ProDevTask proDevTask = new ProDevTask();
         proDevTask.setId(devTid);
-        if (finished == 1 || finished == 2)
+        if (finished == 0 || finished == 1)
             proDevTask.setFinished(finished);
         else return false;
         proDevTask.setGmtUpdate(new Date());
