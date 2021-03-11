@@ -14,6 +14,7 @@ import zju.cst.project.common.utils.FileDfsUtil;
 import zju.cst.project.common.utils.ResultTool;
 import zju.cst.project.entity.ProFile;
 import zju.cst.project.entity.ProUser;
+import zju.cst.project.entity.vo.FileVo;
 import zju.cst.project.service.FileService;
 import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.UserService;
@@ -263,6 +264,10 @@ public class FileController {
 
         // 查询文件
         List<ProFile> proFileList = fileService.getFilesByPid(pid);
-        return ResultTool.success(proFileList);
+        List<FileVo> fileVos = new ArrayList<FileVo>();
+        for (ProFile proFile : proFileList) {
+            fileVos.add(new FileVo(proFile, userService.queryById(proFile.getUid())));
+        }
+        return ResultTool.success(fileVos);
     }
 }
