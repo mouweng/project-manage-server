@@ -36,7 +36,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void addFile(String fileName, String filePath, Integer pid, Integer uid, Long size, String suffix) {
+    public int addFile(String fileName, String filePath, Integer pid, Integer uid, Long size, String suffix) {
         ProFile proFile = new ProFile();
         proFile.setFileName(fileName);
         proFile.setFilePath(filePath);
@@ -47,6 +47,7 @@ public class FileServiceImpl implements FileService {
         proFile.setGmtCreate(new Date());
         proFile.setGmtUpdate(new Date());
         fileDao.insert(proFile);
+        return proFile.getId();
     }
 
     @Override

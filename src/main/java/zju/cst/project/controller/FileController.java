@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,6 +69,7 @@ public class FileController {
             return ResultTool.fail(ResultCode.NO_PERMISSION);
         }
 
+        List<ProFile> fileList = new ArrayList<>();
         for (MultipartFile file : files) {
             String fileName = file.getOriginalFilename();
 
@@ -81,7 +83,8 @@ public class FileController {
                 if(StringUtils.isEmpty(path)) return ResultTool.fail(ResultCode.FILE_UPLOAD_ERROR);
                 // todo:这里可以加一层编码
                 String filePath = path + fileUrl + "?attname=" + fileNameDecode(fileName);
-                fileService.addFile(fileName, filePath, pid, principalUser.getId(), file.getSize(), fileUrl);
+                int fileId = fileService.addFile(fileName, filePath, pid, principalUser.getId(), file.getSize(), fileUrl);
+                fileList.add(fileService.queryByIdAndPid(fileId, pid));
             } catch (Exception e) {
                 e.printStackTrace();
                 return ResultTool.fail(ResultCode.FILE_UPLOAD_ERROR);
@@ -104,7 +107,7 @@ public class FileController {
             }
             */
         }
-        return ResultTool.success("文件上传成功");
+        return ResultTool.success(fileList);
     }
 
     private String fileNameDecode(String fileName) {
