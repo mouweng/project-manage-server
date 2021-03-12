@@ -178,4 +178,9 @@ public class UserController {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
         return ResultTool.success(this.userService.getAllUsers());
     }
+
+    @GetMapping(value = "/user/queryUserByDevTid/{devtid}")
+    public JsonResult queryUserByDevTid(@PathVariable("devtid") Integer devtid) {
+        return ResultTool.success(userService.queryUserByDevTid(devtid));
+    }
 }

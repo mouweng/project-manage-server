@@ -205,4 +205,9 @@ public class UserServiceImpl implements UserService {
         ProUserRole proUserRole = userRoleDao.selectByUid(id);
         return proUserRole.getRoleId();
     }
+
+    @Override
+    public List<ProUser> queryUserByDevTid(Integer devtid) {
+        return userDao.queryUserByDevTid(devtid);
+    }
 }

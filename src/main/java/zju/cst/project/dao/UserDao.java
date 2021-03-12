@@ -88,4 +88,6 @@ public interface UserDao {
      * @date: 2021/2/28 9:23 上午
      */
     List<ProUser> queryUserByPidAndType(Integer id, Integer type);
+
+    List<ProUser> queryUserByDevTid(Integer devtid);
 }

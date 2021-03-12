@@ -128,4 +128,14 @@
         ON pu.uid = u.id
         WHERE pu.pid = #{id} AND pu.type = #{type}
     </select>
+
+    <select id="queryUserByDevTid" resultMap="UserMap">
+        SELECT
+            u.*
+        FROM pro_dev_task_user AS dtu
+        LEFT JOIN pro_user AS u
+        ON dtu.uid = u.id
+        WHERE dtu.dev_tid = #{devTid}
+    </select>
+
 </mapper>

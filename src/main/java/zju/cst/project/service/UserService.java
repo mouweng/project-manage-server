@@ -1,5 +1,6 @@
 package zju.cst.project.service;
 
+import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.UserVo;
 
@@ -116,4 +117,6 @@ public interface UserService {
     Map<Integer, List<ProUser>> queryUserByPid(Integer id);
 
     Integer queryUserRole(Integer id);
+
+    List<ProUser> queryUserByDevTid(Integer devtid);
 }
