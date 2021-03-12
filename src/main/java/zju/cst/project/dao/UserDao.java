@@ -89,5 +89,5 @@ public interface UserDao {
      */
     List<ProUser> queryUserByPidAndType(Integer id, Integer type);
 
-    List<ProUser> queryUserByDevTid(Integer devtid);
+    List<ProUser> queryUserByDevTid(Integer devTid);
 }

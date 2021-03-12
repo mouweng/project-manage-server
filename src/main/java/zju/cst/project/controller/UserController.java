@@ -179,8 +179,8 @@ public class UserController {
         return ResultTool.success(this.userService.getAllUsers());
     }
 
-    @GetMapping(value = "/user/queryUserByDevTid/{devtid}")
-    public JsonResult queryUserByDevTid(@PathVariable("devtid") Integer devtid) {
-        return ResultTool.success(userService.queryUserByDevTid(devtid));
+    @GetMapping(value = "/user/queryUserByDevTid/{devTid}")
+    public JsonResult queryUserByDevTid(@PathVariable("devTid") Integer devTid) {
+        return ResultTool.success(userService.queryUserByDevTid(devTid));
     }
 }

@@ -118,5 +118,5 @@ public interface UserService {
 
     Integer queryUserRole(Integer id);
 
-    List<ProUser> queryUserByDevTid(Integer devtid);
+    List<ProUser> queryUserByDevTid(Integer devTid);
 }

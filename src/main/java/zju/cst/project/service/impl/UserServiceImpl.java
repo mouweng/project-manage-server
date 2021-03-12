@@ -207,7 +207,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ProUser> queryUserByDevTid(Integer devtid) {
-        return userDao.queryUserByDevTid(devtid);
+    public List<ProUser> queryUserByDevTid(Integer devTid) {
+        return userDao.queryUserByDevTid(devTid);
     }
 }
