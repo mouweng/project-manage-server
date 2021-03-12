@@ -199,4 +199,10 @@ public class UserServiceImpl implements UserService {
         map.put(3, userDao.queryUserByPidAndType(id, 3));
         return map;
     }
+
+    @Override
+    public Integer queryUserRole(Integer id) {
+        ProUserRole proUserRole = userRoleDao.selectByUid(id);
+        return proUserRole.getRoleId();
+    }
 }

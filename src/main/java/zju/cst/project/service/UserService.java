@@ -114,4 +114,6 @@ public interface UserService {
 
 
     Map<Integer, List<ProUser>> queryUserByPid(Integer id);
+
+    Integer queryUserRole(Integer id);
 }

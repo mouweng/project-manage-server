@@ -52,8 +52,11 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         List<ProProject> proProjects = projectService.queryByUidAll(returnUserVo.getId());
         returnUserVo.setProjects(proProjects);
         JsonResult result = ResultTool.success(returnUserVo);
+        Integer role = userService.queryUserRole(proUser.getId());
+        returnUserVo.setRole(role);
         httpServletResponse.setContentType("text/json;charset=utf-8");
         // httpServletResponse.getWriter().write(JSON.toJSONString(result));
         httpServletResponse.getWriter().write(JSON.toJSONString(result, SerializerFeature.WriteDateUseDateFormat));
+
     }
 }

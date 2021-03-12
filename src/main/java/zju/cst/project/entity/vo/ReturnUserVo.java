@@ -58,8 +58,9 @@ public class ReturnUserVo implements Serializable {
     //职务
     private String position;
 
-
     private List<ProProject> projects;
+
+    private Integer role;
 
     public ReturnUserVo(ProUser proUser) {
         id = proUser.getId();
