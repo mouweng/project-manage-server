@@ -2,6 +2,7 @@ package zju.cst.project.controller;
 
 //import org.omg.CORBA.NO_PERMISSION;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,7 @@ public class UserController {
      * @description: 修改用户信息，可修改字段:userName、password、department、telephone、position
      * @date: 2021/1/21 7:54 下午
      */
+    @CacheEvict(value = "user", key = "'alluser'")
     @PostMapping("/user/modifyUser")
     public JsonResult modifyUser(UserVo userVo, Principal principal) {
         // 如果查询不到user，则返回账号不存在
@@ -106,6 +108,7 @@ public class UserController {
      * @description: 
      * @date: 2021/1/29 9:58 上午 
      */
+    @CacheEvict(value = "user", key = "'alluser'")
     @PostMapping("/user/createUser")
     public JsonResult createUser(UserVo userVo, Principal principal) {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
@@ -153,6 +156,7 @@ public class UserController {
      * @description: 
      * @date: 2021/1/29 9:58 上午 
      */
+    @Cacheable(value = "user", key = "'alluser'")
     @GetMapping("/user/deleteUser/{id}")
     public JsonResult deleteUser(@PathVariable("id") Integer id, Principal principal) {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
