@@ -2,6 +2,7 @@ package zju.cst.project.controller;
 
 //import org.omg.CORBA.NO_PERMISSION;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import zju.cst.project.common.entity.JsonResult;
@@ -173,6 +174,7 @@ public class UserController {
      * @description: 获取数据库中所有的用户
      * @author: Huachang Yu
      */
+    @Cacheable(value = "user", key = "'alluser'")
     @GetMapping( value = "/user/all")
     public JsonResult<List<ProUser>> getAllUser(Principal principal) {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
