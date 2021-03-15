@@ -117,7 +117,7 @@ public class DevTaskController {
     }
 
     @Transactional
-    @GetMapping(value = "/user/setDevTaskUsers/{devTid}")
+    @GetMapping(value = "/devTask/setDevTaskUsers/{devTid}")
     public JsonResult setDevUsers(@PathVariable("devTid") Integer devTid, @RequestParam("userIds") Integer[] useIds) {
         return ResultTool.success(devTaskService.setDevTaskUsers(devTid, Arrays.asList(useIds)));
     }
