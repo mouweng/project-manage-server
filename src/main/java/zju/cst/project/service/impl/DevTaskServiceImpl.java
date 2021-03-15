@@ -3,8 +3,10 @@ package zju.cst.project.service.impl;
 import org.springframework.stereotype.Service;
 import zju.cst.project.dao.DevTaskDao;
 import zju.cst.project.dao.DevTaskUserDao;
+import zju.cst.project.dao.UserDao;
 import zju.cst.project.entity.ProDevTask;
 import zju.cst.project.entity.ProDevTaskUser;
+import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.DevTaskService;
 
@@ -24,6 +26,8 @@ public class DevTaskServiceImpl implements DevTaskService {
     DevTaskDao devTaskDao;
     @Resource
     DevTaskUserDao devTaskUserDao;
+    @Resource
+    UserDao userDao;
 
     @Override
     public int getDevTaskNum(){
@@ -109,6 +113,13 @@ public class DevTaskServiceImpl implements DevTaskService {
         else return false;
         proDevTask.setGmtUpdate(new Date());
         return devTaskDao.update(proDevTask) > 0 ? true : false;
+    }
+
+    @Override
+    public List<ProUser> setDevTaskUsers(Integer devTid, List<Integer> userIds) {
+        int d = devTaskUserDao.deleteByDevTid(devTid);
+        int in = devTaskUserDao.insertDevTaskUsers(devTid, userIds);
+        return userDao.queryUserByDevTid(devTid);
     }
 
 

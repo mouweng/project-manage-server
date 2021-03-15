@@ -40,6 +40,8 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+#  configuration: # 用于调试
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 file:
   path: 120.27.223.34:8888/

@@ -1,6 +1,7 @@
 package zju.cst.project.service;
 
 import zju.cst.project.entity.ProDevTask;
+import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 
 import java.util.List;
@@ -41,4 +42,6 @@ public interface DevTaskService {
     boolean updateDevTask(CreateDevTaskVo createDevTaskVo);
 
     boolean updateDevTaskFinished(Integer devTid, Integer finished);
+
+    List<ProUser> setDevTaskUsers(Integer pid, List<Integer> userIds);
 }

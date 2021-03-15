@@ -1,6 +1,7 @@
 package zju.cst.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
@@ -8,6 +9,9 @@ import zju.cst.project.common.utils.ResultTool;
 import zju.cst.project.entity.ProDevTask;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.DevTaskService;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author: wengyifan
@@ -112,4 +116,9 @@ public class DevTaskController {
         else return ResultTool.fail(ResultCode.COMMON_FAIL);
     }
 
+    @Transactional
+    @GetMapping(value = "/user/setDevTaskUsers/{devTid}")
+    public JsonResult setDevUsers(@PathVariable("devTid") Integer devTid, @RequestParam("userIds") Integer[] useIds) {
+        return ResultTool.success(devTaskService.setDevTaskUsers(devTid, Arrays.asList(useIds)));
+    }
 }
