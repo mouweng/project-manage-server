@@ -1,5 +1,6 @@
 package zju.cst.project.service;
 
+import springfox.documentation.annotations.Cacheable;
 import zju.cst.project.entity.ProPermission;
 
 import java.util.List;
