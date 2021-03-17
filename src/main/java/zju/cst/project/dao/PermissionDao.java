@@ -1,6 +1,7 @@
 package zju.cst.project.dao;
 
 import org.mapstruct.Mapper;
+import org.springframework.cache.annotation.Cacheable;
 import zju.cst.project.entity.ProPermission;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public interface PermissionDao {
      * @description: 查询用户的权限
      * @date: 2021/1/21 7:57 下午
      */
+    @Cacheable(value = "permission", key = "'userList' + #id")
     List<ProPermission> selectListByUser(Integer id);
 
 
@@ -32,5 +34,6 @@ public interface PermissionDao {
      * @description: 查询具体某个接口的权限
      * @date: 2021/1/21 7:57 下午
      */
+    @Cacheable(value = "permission", key = "'path' + #path")
     List<ProPermission> selectListByPath(String path);
 }

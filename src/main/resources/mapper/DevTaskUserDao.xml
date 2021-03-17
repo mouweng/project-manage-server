@@ -48,4 +48,14 @@
     <delete id="deleteByDevTid">
         delete from pro_dev_task_user where dev_tid = #{devTid}
     </delete>
+
+    <insert id="insertDevTaskUsers">
+        INSERT INTO
+            pro_dev_task_user(dev_tid, uid)
+        VALUES
+        <foreach collection="userIds" item="uid" index="ind"
+                 open="" close="" separator=",">
+            (#{devTid}, #{uid})
+        </foreach>
+    </insert>
 </mapper>

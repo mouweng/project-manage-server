@@ -3,6 +3,8 @@ package zju.cst.project.dao;
 import org.mapstruct.Mapper;
 import zju.cst.project.entity.ProDevTaskUser;
 
+import java.util.List;
+
 /**
  * @author: wengyifan
  * @description: DevTaskUserDao数据接口层
@@ -70,4 +72,6 @@ public interface DevTaskUserDao {
      * @date: 2021/1/28 8:32 下午
      */
     int deleteByDevTid(Integer devTid);
+
+    int insertDevTaskUsers(Integer devTid, List<Integer> userIds);
 }

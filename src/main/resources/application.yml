@@ -26,12 +26,26 @@ spring:
     multipart:
       max-file-size: 100MB # 最大支持文件大小
       max-request-size: 100MB # 最大支持请求大小
+  redis:
+    host: 120.79.149.10
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+#  configuration: # 用于调试
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 file:
   path: 120.27.223.34:8888/
+#  path: 120.79.149.10:8888/
 
 
 #分布式文件系统Fdfsdfs配置
@@ -43,3 +57,4 @@ fdfs:
     height: 150
   trackerList: #TrackerList参数,支持多个，我这里只有一个，如果有多个在下方加- x.x.x.x:port
     - 120.27.223.34:22122
+#    - 120.79.149.10:22122

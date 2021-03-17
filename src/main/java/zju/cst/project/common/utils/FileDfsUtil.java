@@ -1,12 +1,16 @@
 package zju.cst.project.common.utils;
 
+import com.github.tobato.fastdfs.domain.fdfs.StorageNode;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import com.github.tobato.fastdfs.service.DefaultFastFileStorageClient;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Method;
 
 /**
  * @author: wengyifan
@@ -16,7 +20,18 @@ import javax.annotation.Resource;
 @Component
 public class FileDfsUtil {
     @Resource
-    private FastFileStorageClient storageClient ;
+    private FastFileStorageClient storageClient;
+//    private static Method getStorageNodeMethod;
+//
+//    static {
+//        try {
+//            Class<?> defaultFastFileStorageClientClass = DefaultFastFileStorageClient.class;
+//            getStorageNodeMethod = defaultFastFileStorageClientClass.getDeclaredMethod("getStorageNode", String.class);
+//            getStorageNodeMethod.setAccessible(true);
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * 上传文件
@@ -26,9 +41,14 @@ public class FileDfsUtil {
                 substring(multipartFile.getOriginalFilename().
                         lastIndexOf(".") + 1);
         // 如果上传的文件没有后缀，则将后缀设为none
+
         if (originalFilename.equals(multipartFile.getOriginalFilename())) originalFilename = "none";
         StorePath storePath = this.storageClient.uploadFile(multipartFile.getInputStream(), multipartFile.getSize(),originalFilename , null);
-        return storePath.getFullPath() ;
+//        StorageNode storageNode = (StorageNode) getStorageNodeMethod.invoke(this.storageClient, storePath.getGroup());
+//        String nodeIp = storageNode.getIp();
+//        System.out.println(nodeIp);
+//        return nodeIp + ":8888/" + storePath.getFullPath() ;
+        return storePath.getFullPath();
     }
 
     /**
