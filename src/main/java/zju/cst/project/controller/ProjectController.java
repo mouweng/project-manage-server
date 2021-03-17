@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.entity.ProDevTask;
 import zju.cst.project.entity.ProProject;
 import zju.cst.project.entity.ProUser;
+import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.entity.vo.ProjectVo;
+import zju.cst.project.entity.vo.ReturnProjectVo;
+import zju.cst.project.service.DevTaskService;
 import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.UserService;
 
@@ -28,6 +32,8 @@ public class ProjectController {
     ProjectService projectService;
     @Autowired
     UserService userService;
+    @Autowired
+    DevTaskService devTaskService;
 
 
     /**
@@ -208,7 +214,31 @@ public class ProjectController {
 
         // 关联项目和管理员
         projectService.addManagerUser(pid, principalUser.getId());
-        return ResultTool.success(proProject);
+
+
+        // 创建devTask
+        ProDevTask dev1 = setDevTask(principalUser.getId(), pid, "需求分析","需求分析", 1);
+        ProDevTask dev2 = setDevTask(principalUser.getId(), pid, "总体设计","总体设计", 1);
+        ProDevTask dev3 = setDevTask(principalUser.getId(), pid, "数据库设计","数据库设计", 1);
+
+        // 返回Project
+        ReturnProjectVo returnProjectVo = new ReturnProjectVo(proProject, dev1, dev2, dev3);
+
+        return ResultTool.success(returnProjectVo);
+
+
+    }
+
+    private ProDevTask setDevTask(int uid, int pid, String name, String content, int status) {
+        CreateDevTaskVo createDevTaskVo = new CreateDevTaskVo();
+        createDevTaskVo.setUid(uid);
+        createDevTaskVo.setPid(pid);
+        createDevTaskVo.setName(name);
+        createDevTaskVo.setContent(content);
+        createDevTaskVo.setStatus(status);
+        int devTid = devTaskService.createDevTask(createDevTaskVo);
+        devTaskService.createDevTaskUser(devTid, createDevTaskVo.getUid());
+        return devTaskService.queryDevTaskByDevTid(devTid);
     }
 
     // todo:设置测试组长
