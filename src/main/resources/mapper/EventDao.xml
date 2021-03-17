@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zju.cst.project.dao.EventDao">
+
+    <resultMap id="EventMap" type="zju.cst.project.entity.ProEvent">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="taskId" column="task_id" jdbcType="INTEGER"/>
+        <result property="taskType" column="task_type" jdbcType="INTEGER"/>
+        <result property="eventType" column="event_type" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="time" column="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into pro_event(project_id, project_name, user_id, user_name, task_id, task_type, event_type, content, time)
+        values (#{projectId}, #{projectName}, #{userId}, #{userName}, #{taskId}, #{taskType}, #{eventType}, #{content}, #{time})
+    </insert>
+
+    <select id="queryEventsByProjectId" resultMap="EventMap">
+        SELECT
+            *
+        FROM pro_event
+        WHERE project_id = #{projectId}
+        ORDER BY time DESC
+    </select>
+
+    <select id="queryEventsByProjectId" resultMap="EventMap">
+        SELECT
+            *
+        FROM pro_event
+        WHERE user_id = #{userId}
+        ORDER BY time DESC
+    </select>
+
+</mapper>
