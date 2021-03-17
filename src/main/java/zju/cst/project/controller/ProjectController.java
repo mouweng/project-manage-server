@@ -19,6 +19,10 @@ import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.UserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wengyifan
@@ -221,10 +225,17 @@ public class ProjectController {
         ProDevTask dev2 = setDevTask(principalUser.getId(), pid, "总体设计","总体设计", 1);
         ProDevTask dev3 = setDevTask(principalUser.getId(), pid, "数据库设计","数据库设计", 1);
 
-        // 返回Project
-        ReturnProjectVo returnProjectVo = new ReturnProjectVo(proProject, dev1, dev2, dev3);
 
-        return ResultTool.success(returnProjectVo);
+
+        // 返回Project
+//        ReturnProjectVo returnProjectVo = new ReturnProjectVo(proProject, dev1, dev2, dev3);
+        Map<String, Object> map = new HashMap<>();
+        List<ProDevTask> list = new ArrayList<>();
+        list.add(dev1);list.add(dev2);list.add(dev3);
+        map.put("project", proProject);
+        map.put("devTask", list);
+
+        return ResultTool.success(map);
 
 
     }
