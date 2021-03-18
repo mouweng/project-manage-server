@@ -108,7 +108,11 @@ public class FileController {
             }
             */
         }
-        return ResultTool.success(fileList);
+        List<FileVo> fileVos = new ArrayList<FileVo>();
+        for (ProFile proFile : fileList) {
+            fileVos.add(new FileVo(proFile, userService.queryById(proFile.getUid())));
+        }
+        return ResultTool.success(fileVos);
     }
 
     private String fileNameDecode(String fileName) {
