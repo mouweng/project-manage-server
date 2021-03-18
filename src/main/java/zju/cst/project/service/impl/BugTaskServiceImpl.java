@@ -5,6 +5,7 @@ import zju.cst.project.dao.BugTaskDao;
 import zju.cst.project.dao.BugTaskUserDao;
 import zju.cst.project.entity.ProBugTask;
 import zju.cst.project.entity.ProBugTaskUser;
+import zju.cst.project.entity.ProEvent;
 import zju.cst.project.entity.vo.CreateBugTaskVo;
 import zju.cst.project.service.BugTaskService;
 
@@ -33,7 +34,7 @@ public class BugTaskServiceImpl implements BugTaskService {
         return bugTaskDao.getTaskCreatedInAWeek();
     }
 
-    public int createBugTask(CreateBugTaskVo createBugTaskVo){
+    public ProBugTask createBugTask(CreateBugTaskVo createBugTaskVo){
         ProBugTask proBugTask = new ProBugTask();
         proBugTask.setDevTid(createBugTaskVo.getDevTid());
         proBugTask.setContent(createBugTaskVo.getContent());
@@ -43,7 +44,7 @@ public class BugTaskServiceImpl implements BugTaskService {
         proBugTask.setGmtCreate(new Date());
         proBugTask.setGmtUpdate(new Date());
         bugTaskDao.insert(proBugTask);
-        return proBugTask.getId();
+        return proBugTask;
     }
 
     @Override
@@ -102,6 +103,8 @@ public class BugTaskServiceImpl implements BugTaskService {
         proBugTask.setDevTid(createBugTaskVo.getDevTid());
         proBugTask.setContent(createBugTaskVo.getContent());
         proBugTask.setGmtUpdate(new Date());
+
+
         return bugTaskDao.update(proBugTask) > 0;
     }
 

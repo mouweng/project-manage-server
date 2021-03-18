@@ -29,7 +29,7 @@ public class VisualController {
     DevTaskService devTaskService;
     @Autowired
     BugTaskService bugTaskService;
-    // todo: 统计项目个数
+    // 统计项目个数
     /**
      * @return int
      * @throws
@@ -42,13 +42,13 @@ public class VisualController {
         return ResultTool.success(projectService.getProjectNum());
     }
 
-    // todo: 统计文件个数
+    // 统计文件个数
     @GetMapping("/visual/getFileNum")
     public JsonResult getFileNum(){
         return ResultTool.success(fileService.getFileNum());
     }
 
-    // todo: 统计任务个数
+    // 统计任务个数
     @GetMapping("/visual/getTaskNum")
     public JsonResult getTaskNum(){
         int devTaskNum = devTaskService.getDevTaskNum();
@@ -63,19 +63,19 @@ public class VisualController {
         return ResultTool.success(map);
     }
 
-    // todo: 统计用户个数
+    // 统计用户个数
     @GetMapping("/visual/getUserNum")
     public JsonResult getUserNum(){
         return ResultTool.success(userService.getUserNum());
     }
 
-    // todo: 统计文件下载次数
+    // 统计文件下载次数
     @GetMapping("/visual/getTotalDownloadTimes")
     public JsonResult getTotalDownloadTimes(){
         return ResultTool.success(fileService.getTotalDownloadTimes());
     }
 
-    // todo: 统计近7天任务创建情况
+    // 统计近7天任务创建情况
     @GetMapping("/visual/getTaskCreatedInAWeek")
     public JsonResult getTaskCreatedInAWeek(){
         Map map = new HashMap();
@@ -84,7 +84,7 @@ public class VisualController {
         return ResultTool.success(map);
     }
 
-    // todo: 统计近7天任务完成情况
+    // 统计近7天任务完成情况
     @GetMapping("/visual/getTaskFinishedInAWeek")
     public JsonResult getTaskFinishedInAWeek(){
         Map map = new HashMap();
