@@ -12,7 +12,7 @@ public interface BugTaskService {
 
     List<ProBugTask> getTaskCreatedInAWeek();
 
-    int createBugTask(CreateBugTaskVo createBugTaskVo);
+    ProBugTask createBugTask(CreateBugTaskVo createBugTaskVo);
 
     boolean createBugTaskUser(int DevTid, Integer devUid, Integer testUid);
 

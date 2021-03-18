@@ -18,7 +18,7 @@ public class ProEvent implements Serializable {
     // 项目名称
     public String projectName;
     // 用户id
-    public String userId;
+    public Integer userId;
     // 用户名称
     public String userName;
     // 任务id

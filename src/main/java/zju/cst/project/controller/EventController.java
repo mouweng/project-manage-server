@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.entity.ProEvent;
 import zju.cst.project.service.EventService;
+
+import java.util.List;
 
 /**
  *

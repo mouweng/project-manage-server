@@ -10,7 +10,9 @@ import java.util.List;
  * @date 2021/3/16 5:30 下午
  */
 public interface EventService{
-    public List<ProEvent> queryEventsByProjectId(int projectId);
+    boolean createEvent(ProEvent proEvent);
 
-    public List<ProEvent> queryEventsByUserId(int userId);
+    List<ProEvent> queryEventsByProjectId(int projectId);
+
+    List<ProEvent> queryEventsByUserId(int userId);
 }

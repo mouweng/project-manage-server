@@ -34,6 +34,4 @@ public interface BugTaskDao {
 
     List<ProBugTask> queryBugTaskByPidAndStatus(Integer pid, Integer status);
 
-
-
 }

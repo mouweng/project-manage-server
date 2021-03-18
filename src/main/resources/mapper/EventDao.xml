@@ -28,7 +28,7 @@
         ORDER BY time DESC
     </select>
 
-    <select id="queryEventsByProjectId" resultMap="EventMap">
+    <select id="queryEventsByUserId" resultMap="EventMap">
         SELECT
             *
         FROM pro_event

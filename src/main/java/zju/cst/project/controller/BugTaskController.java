@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.entity.ProBugTask;
+import zju.cst.project.entity.ProEvent;
 import zju.cst.project.entity.vo.CreateBugTaskVo;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.BugTaskService;
 import zju.cst.project.service.DevTaskService;
+import zju.cst.project.service.EventService;
+
+import java.util.Date;
 
 /**
  * @author: wengyifan
@@ -22,11 +27,24 @@ import zju.cst.project.service.DevTaskService;
 public class BugTaskController {
     @Autowired
     BugTaskService bugTaskService;
+    @Autowired
+    EventService eventService;
     //添加任务
     @PostMapping("/bugTask/createBugTask")
     public JsonResult createBugTask(CreateBugTaskVo createBugTaskVo) {
-        int bugTid = bugTaskService.createBugTask(createBugTaskVo);
-        bugTaskService.createBugTaskUser(bugTid, createBugTaskVo.getDevUid(), createBugTaskVo.getTestUid());
+        ProBugTask proBugTask = bugTaskService.createBugTask(createBugTaskVo);
+        bugTaskService.createBugTaskUser(proBugTask.getId(), createBugTaskVo.getDevUid(), createBugTaskVo.getTestUid());
+        ProEvent proEvent = new ProEvent();
+        proEvent.setProjectId(proBugTask.getProjectId());
+        proEvent.setUserId(createBugTaskVo.getTestUid());
+        proEvent.setContent(createBugTaskVo.getContent());
+        proEvent.setTaskId(proBugTask.getId());
+        // 0: dev, 1: test, 2:bug
+        proEvent.setTaskType(2);
+        proEvent.setTime(new Date());
+        // 0: create ,1: finish
+        proEvent.setEventType(0);
+        eventService.createEvent(proEvent);
         return ResultTool.success("任务添加成功");
     }
 
