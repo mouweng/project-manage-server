@@ -12,6 +12,8 @@ import java.util.List;
 public interface EventService{
     boolean createEvent(ProEvent proEvent);
 
+    boolean createEvent(int taskId, int taskType, int eventType);
+
     List<ProEvent> queryEventsByProjectId(int projectId);
 
     List<ProEvent> queryEventsByUserId(int userId);
