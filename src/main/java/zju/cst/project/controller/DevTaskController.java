@@ -7,10 +7,13 @@ import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
 import zju.cst.project.entity.ProDevTask;
+import zju.cst.project.entity.ProEvent;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.DevTaskService;
+import zju.cst.project.service.EventService;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,15 +26,24 @@ public class DevTaskController {
 
     @Autowired
     DevTaskService devTaskService;
+    @Autowired
+    EventService eventService;
 
     // 添加任务
     // 传递参数：uid（用户id）, pid（项目id）, content（任务内容）, name（任务名字）
     @PostMapping("/devTask/createDevTask")
     public JsonResult createDevTask(CreateDevTaskVo createDevTaskVo) {
         int devTid = devTaskService.createDevTask(createDevTaskVo);
-        devTaskService.createDevTaskUser(devTid, createDevTaskVo.getUid());
+        boolean res1 = devTaskService.createDevTaskUser(devTid, createDevTaskVo.getUid());
         ProDevTask proDevTask = devTaskService.queryDevTaskByDevTid(devTid);
-        return ResultTool.success(proDevTask);
+        boolean res2 = eventService.createEvent(devTid, 0, 0);
+        if(res1 && res2)
+        {
+            return ResultTool.success(proDevTask);
+        }
+        else{
+            return ResultTool.fail(ResultCode.COMMON_FAIL);
+        }
     }
 
 
@@ -39,9 +51,10 @@ public class DevTaskController {
     // 传递参数：devTid（任务id）
     @GetMapping("/devTask/deleteDevTask/{devTid}")
     public JsonResult deleteDevTask(@PathVariable("devTid") Integer devTid) {
-        boolean res1 = devTaskService.deleteDevTask(devTid);
-        boolean res2 = devTaskService.deleteDevTaskUser(devTid);
-        if (res1 && res2) return ResultTool.success("任务删除成功");
+        boolean res1 = eventService.createEvent(devTid, 0, 2);
+        boolean res2 = devTaskService.deleteDevTask(devTid);
+        boolean res3 = devTaskService.deleteDevTaskUser(devTid);
+        if (res1 && res2 && res3) return ResultTool.success("任务删除成功");
         else return ResultTool.fail(ResultCode.COMMON_FAIL);
     }
 
@@ -105,6 +118,9 @@ public class DevTaskController {
     @GetMapping("/devTask/updateDevTaskStatus/{devTid}/{status}")
     public JsonResult updateDevTaskStatus(@PathVariable("devTid") Integer devTid, @PathVariable("status") Integer status) {
         boolean res = devTaskService.updateDevTaskStatus(devTid, status);
+        if(status.equals(2)) {
+            eventService.createEvent(devTid, 0, 1);
+        }
         if(res) return ResultTool.success("状态修改成功");
         else return ResultTool.fail(ResultCode.COMMON_FAIL);
     }
@@ -112,6 +128,9 @@ public class DevTaskController {
     @GetMapping("/devTask/updateDevTaskFinished/{devTid}/{finished}")
     public JsonResult updateDevTaskFinished(@PathVariable("devTid") Integer devTid, @PathVariable("finished") Integer finished) {
         boolean res = devTaskService.updateDevTaskFinished(devTid, finished);
+        if (finished.equals(1)){
+            eventService.createEvent(devTid, 0, 1);
+        }
         if(res) return ResultTool.success("状态修改成功");
         else return ResultTool.fail(ResultCode.COMMON_FAIL);
     }
