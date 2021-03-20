@@ -128,7 +128,9 @@ public class DevTaskController {
     @GetMapping("/devTask/updateDevTaskFinished/{devTid}/{finished}")
     public JsonResult updateDevTaskFinished(@PathVariable("devTid") Integer devTid, @PathVariable("finished") Integer finished) {
         boolean res = devTaskService.updateDevTaskFinished(devTid, finished);
-        if (finished.equals(1)){
+        if (finished.equals(0)) {
+            eventService.createEvent(devTid, 0, 3);
+        } else if (finished.equals(1)){
             eventService.createEvent(devTid, 0, 1);
         }
         if(res) return ResultTool.success("状态修改成功");

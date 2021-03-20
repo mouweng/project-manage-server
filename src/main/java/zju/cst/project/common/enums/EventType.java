@@ -12,7 +12,8 @@ package zju.cst.project.common.enums;
 public enum EventType {
     CREATE(0, "创建"),
     FINISH(1, "完成"),
-    DELETE(2, "删除");
+    DELETE(2, "删除"),
+    CANCEL_FINISH(3, "取消完成");
 
     private Integer code;
     private String message;
