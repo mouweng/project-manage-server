@@ -1,5 +1,7 @@
 package zju.cst.project.service.impl;
 
+import io.swagger.models.auth.In;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;
 import zju.cst.project.dao.DevTaskDao;
 import zju.cst.project.dao.DevTaskUserDao;
@@ -12,7 +14,9 @@ import zju.cst.project.service.DevTaskService;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wengyifan
@@ -141,6 +145,17 @@ public class DevTaskServiceImpl implements DevTaskService {
         proDevTask.setName(createDevTaskVo.getName());
         proDevTask.setGmtUpdate(new Date());
         return devTaskDao.update(proDevTask) > 0 ? true : false;
+    }
+
+    @Override
+    public Map<String, Integer> getUserDevTaskNum(){
+        Map<String, Integer> map = new HashMap();
+        List<ProUser> userList = userDao.getAllUsers();
+        for( ProUser user: userList){
+            List<ProDevTask> devTaskList = devTaskDao.queryByUid(user.getId());
+            map.put(user.getUserName(), devTaskList.size());
+        }
+        return map;
     }
 
 }
