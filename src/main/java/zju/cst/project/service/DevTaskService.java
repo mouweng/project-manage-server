@@ -5,6 +5,7 @@ import zju.cst.project.entity.ProUser;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wengyifan
@@ -45,5 +46,5 @@ public interface DevTaskService {
 
     List<ProUser> setDevTaskUsers(Integer pid, List<Integer> userIds);
 
-
+    Map<String, Integer> getUserDevTaskNum();
 }

@@ -92,4 +92,13 @@ public class VisualController {
         map.put("bugTask", bugTaskService.getTaskFinishedInAWeek());
         return ResultTool.success(map);
     }
+
+    // 统计每个用户的开发任务数量
+    @GetMapping("/visual/getUserDevTaskNum")
+    public JsonResult getUserDevTaskNum(){
+        Map<String, Integer> map = devTaskService.getUserDevTaskNum();
+        return ResultTool.success(map);
+    }
+
+
 }
