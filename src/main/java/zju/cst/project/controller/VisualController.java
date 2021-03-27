@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.entity.ProBugTask;
+import zju.cst.project.entity.ProProject;
+import zju.cst.project.entity.ProTaskCount;
 import zju.cst.project.service.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -100,5 +105,18 @@ public class VisualController {
         return ResultTool.success(map);
     }
 
+    //统计每个项目的开发任务数量
+    @GetMapping("/visual/getProjectDevTaskNum")
+    public JsonResult getProjectDevTaskNum(){
+        List<ProTaskCount> proTaskCounts = new ArrayList<>();
+        List<ProProject> proProjects = projectService.queryAll();
+        for(ProProject proProject: proProjects){
+            String pName = proProject.getName();
+            Integer pid = proProject.getId();
+            Integer count = devTaskService.queryDevTaskByPid(pid).size();
+            proTaskCounts.add(new ProTaskCount(pName, count));
+        }
+        return ResultTool.success(proTaskCounts);
+    }
 
 }
