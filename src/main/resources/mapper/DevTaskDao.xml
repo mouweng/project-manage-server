@@ -88,6 +88,18 @@
         WHERE u.id = #{uid} AND status = #{status}
     </select>
 
+    <select id="queryDevTaskByPidAndUid" resultMap="DevTaskMap">
+        SELECT
+            dt.*
+        FROM
+        pro_user AS u
+        LEFT JOIN pro_dev_task_user AS dtu
+        ON u.id = dtu.uid
+        LEFT JOIN pro_dev_task AS dt
+        ON dtu.dev_tid = dt.id
+        WHERE u.id = #{uid} AND project_id = #{pid}
+    </select>
+
     <update id="update">
         update pro_dev_task
         <set>

@@ -11,7 +11,9 @@ import zju.cst.project.entity.ProEvent;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.DevTaskService;
 import zju.cst.project.service.EventService;
+import zju.cst.project.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +30,8 @@ public class DevTaskController {
     DevTaskService devTaskService;
     @Autowired
     EventService eventService;
+    @Autowired
+    UserService userService;
 
     // 添加任务
     // 传递参数：uid（用户id）, pid（项目id）, content（任务内容）, name（任务名字）
@@ -142,4 +146,21 @@ public class DevTaskController {
     public JsonResult setDevUsers(@PathVariable("devTid") Integer devTid, @RequestParam("userIds") Integer[] useIds) {
         return ResultTool.success(devTaskService.setDevTaskUsers(devTid, Arrays.asList(useIds)));
     }
+
+    @GetMapping(value = "/devTask/getDevTaskByProjectIDandUserID/{pid}/{uid}")
+    public JsonResult getDevTaskByProjectIDandUserID(@PathVariable("pid") Integer pid, @PathVariable("uid") Integer uid) {
+        // 获取User权限
+        Integer roleId = userService.queryUserRole(uid);
+        List<ProDevTask> devTasks;
+        if (roleId == 2 || roleId == 1) {
+            // 管理员得到自己所在项目的Task
+            devTasks = devTaskService.queryDevTaskByPid(pid);
+        } else {
+            // 非管理员得到自己的Task
+            devTasks = devTaskService.queryDevTaskByPidAndUid(pid,uid);
+        }
+        return ResultTool.success(devTasks);
+    }
+
+
 }

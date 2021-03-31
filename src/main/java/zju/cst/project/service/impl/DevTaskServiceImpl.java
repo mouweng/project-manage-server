@@ -158,4 +158,8 @@ public class DevTaskServiceImpl implements DevTaskService {
         return map;
     }
 
+    @Override
+    public List<ProDevTask> queryDevTaskByPidAndUid(Integer pid, Integer uid) {
+        return devTaskDao.queryDevTaskByPidAndUid(pid, uid);
+    }
 }

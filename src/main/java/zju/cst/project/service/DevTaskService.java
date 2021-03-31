@@ -47,4 +47,6 @@ public interface DevTaskService {
     List<ProUser> setDevTaskUsers(Integer pid, List<Integer> userIds);
 
     Map<String, Integer> getUserDevTaskNum();
+
+    List<ProDevTask> queryDevTaskByPidAndUid(Integer pid, Integer uid);
 }

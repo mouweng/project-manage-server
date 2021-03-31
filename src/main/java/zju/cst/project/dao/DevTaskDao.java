@@ -103,4 +103,6 @@ public interface DevTaskDao {
     List<ProDevTask> queryDevTaskByUidAndStatus(Integer uid, Integer status);
 
     List<ProDevTask> queryDevTaskByPidAndStatus(Integer pid, Integer status);
+
+    List<ProDevTask> queryDevTaskByPidAndUid(Integer pid, Integer uid);
 }
