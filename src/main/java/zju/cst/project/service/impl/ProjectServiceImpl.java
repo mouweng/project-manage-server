@@ -181,6 +181,28 @@ public class ProjectServiceImpl implements ProjectService {
         projectDao.deleteById(pid);
         projectUserDao.deleteByPid(pid);
     }
+
+    @Override
+    public List<ProProject> queryProjectFromDevTask(Integer uid) {
+        List<ProProject> temp = projectDao.queryProjectFromDevTask(uid);
+        List<ProProject> proProjects = projectDao.queryProjectByUidAndType(uid, 1);
+        // 去重
+        Set<Integer> s = new HashSet<Integer>();
+        for(ProProject p : temp) {
+            if (p != null)
+                s.add(p.getId());
+        }
+        for(ProProject p : proProjects) {
+            if (p != null)
+                s.add(p.getId());
+        }
+        List<ProProject> res = new ArrayList<ProProject>();
+        for (int id : s) {
+            ProProject p = projectDao.queryById(id);
+            res.add(p);
+        }
+        return res;
+    }
 }
 
 

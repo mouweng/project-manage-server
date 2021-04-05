@@ -167,16 +167,17 @@ public class ProjectController {
         return ResultTool.success("添加成功");
     }
 
-    /**
-     * @param pid
-     * @param uid
-     * @param principal
-     * @return {@link JsonResult}
-     * @throws
-     * @author: wengyifan
-     * @description: 删除项目成员（项目经理权限）
-     * @date: 2021/3/1 1:18 下午
-     */
+
+        /**
+         * @param pid
+         * @param uid
+         * @param principal
+         * @return {@link JsonResult}
+         * @throws
+         * @author: wengyifan
+         * @description: 删除项目成员（项目经理权限）
+         * @date: 2021/3/1 1:18 下午
+         */
     @GetMapping("/project/deleteUser/{pid}/{uid}")
     public JsonResult deleteUser(@PathVariable("pid") Integer pid, @PathVariable("uid") Integer uid, Principal principal) {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);

@@ -11,6 +11,7 @@ import zju.cst.project.entity.ProEvent;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.service.DevTaskService;
 import zju.cst.project.service.EventService;
+import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.UserService;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class DevTaskController {
     EventService eventService;
     @Autowired
     UserService userService;
+    @Autowired
+    ProjectService projectService;
 
     // 添加任务
     // 传递参数：uid（用户id）, pid（项目id）, content（任务内容）, name（任务名字）
@@ -41,6 +44,12 @@ public class DevTaskController {
         boolean res1 = devTaskService.createDevTaskUser(devTid, createDevTaskVo.getUid());
         ProDevTask proDevTask = devTaskService.queryDevTaskByDevTid(devTid);
         boolean res2 = eventService.createEvent(devTid, 0, 0);
+//        // 添加用户，如果已经存在，则不用重复添加
+//        int uid = createDevTaskVo.getUid();
+//        int pid = createDevTaskVo.getPid();
+//        if(!projectService.queryProjectUserByUidPid(uid, pid)) {
+//            projectService.addUser(pid, uid);
+//        }
         if(res1 && res2)
         {
             return ResultTool.success(proDevTask);
@@ -58,6 +67,7 @@ public class DevTaskController {
         boolean res1 = eventService.createEvent(devTid, 0, 2);
         boolean res2 = devTaskService.deleteDevTask(devTid);
         boolean res3 = devTaskService.deleteDevTaskUser(devTid);
+
         if (res1 && res2 && res3) return ResultTool.success("任务删除成功");
         else return ResultTool.fail(ResultCode.COMMON_FAIL);
     }

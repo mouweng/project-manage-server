@@ -49,11 +49,20 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         //返回json数据
         ReturnUserVo returnUserVo = new ReturnUserVo(proUser);
-        List<ProProject> proProjects = projectService.queryByUidAll(returnUserVo.getId());
-        returnUserVo.setProjects(proProjects);
+
         JsonResult result = ResultTool.success(returnUserVo);
         Integer role = userService.queryUserRole(proUser.getId());
         returnUserVo.setRole(role);
+
+        List<ProProject> proProjects;
+        if (role == 1) {
+            proProjects = projectService.queryAll();
+        } else {
+            proProjects = projectService.queryProjectFromDevTask(returnUserVo.getId());
+        }
+        returnUserVo.setProjects(proProjects);
+
+
         httpServletResponse.setContentType("text/json;charset=utf-8");
         // httpServletResponse.getWriter().write(JSON.toJSONString(result));
         httpServletResponse.getWriter().write(JSON.toJSONString(result, SerializerFeature.WriteDateUseDateFormat));

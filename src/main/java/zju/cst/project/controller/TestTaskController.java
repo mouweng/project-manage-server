@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import zju.cst.project.common.entity.JsonResult;
 import zju.cst.project.common.enums.ResultCode;
 import zju.cst.project.common.utils.ResultTool;
+import zju.cst.project.dao.ProjectUserDao;
 import zju.cst.project.entity.vo.CreateDevTaskVo;
 import zju.cst.project.entity.vo.CreateTestTaskVo;
+import zju.cst.project.service.ProjectService;
 import zju.cst.project.service.TestTaskService;
 
 /**
@@ -22,6 +24,9 @@ public class TestTaskController {
 
     @Autowired
     TestTaskService testTaskService;
+
+    @Autowired
+    ProjectService projectService;
 
     // todo: 添加任务
     // 传递参数：devTid(开发任务id), uid（用户id）, pid（项目id）, testCase（测试用例）, testResults（测试结果）

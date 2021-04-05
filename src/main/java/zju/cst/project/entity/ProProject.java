@@ -29,4 +29,5 @@ public class ProProject implements Serializable {
     //修改时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date gmtUpdate;
+
 }

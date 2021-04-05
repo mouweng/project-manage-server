@@ -84,4 +84,7 @@ public interface ProjectDao {
      * @date: 2021/3/3 8:14 下午
      */
     int getProjectNum();
+
+    List<ProProject> queryProjectFromDevTask(Integer uid);
+
 }

@@ -68,4 +68,16 @@
     </select>
 
 
+    <select id="queryProjectFromDevTask" resultMap="ProjectMap">
+        SELECT
+            p.*
+        FROM
+            pro_dev_task_user AS dtu
+        LEFT JOIN pro_dev_task AS dt
+        ON dtu.dev_tid = dt.id
+        LEFT JOIN pro_project AS p
+        ON dt.project_id = p.id
+        WHERE dtu.uid = #{uid}
+    </select>
+
 </mapper>

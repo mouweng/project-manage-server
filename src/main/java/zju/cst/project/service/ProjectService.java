@@ -123,4 +123,5 @@ public interface ProjectService {
 
     List<ProProject> queryByUidAll(Integer id);
 
+    List<ProProject> queryProjectFromDevTask(Integer uid);
 }
