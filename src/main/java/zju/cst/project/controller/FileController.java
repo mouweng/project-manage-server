@@ -256,16 +256,6 @@ public class FileController {
     @GetMapping("/file/getFilesByPid/{pid}")
     public JsonResult getFilesByPid(@PathVariable("pid") Integer pid, Principal principal) {
         if (principal == null) return ResultTool.fail(ResultCode.USER_NOT_LOGIN);
-        // 获取当前登录用户
-        String principalUserName = principal.getName();
-        ProUser principalUser = userService.selectByName(principalUserName);
-
-        // 验证是否可以查询文件（验证这个人是否在这个项目中）
-        Integer principalUid = principalUser.getId();
-        if (!projectService.queryProjectUserByUidPid(principalUid, pid)) {
-            return ResultTool.fail(ResultCode.NO_PERMISSION);
-        }
-
         // 查询文件
         List<ProFile> proFileList = fileService.getFilesByPid(pid);
         List<FileVo> fileVos = new ArrayList<FileVo>();
